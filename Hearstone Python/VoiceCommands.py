@@ -11,7 +11,8 @@ class VoiceCommands:
     #
 
     def quitProgram(self):
-        Main.programRunning = False
+        #Python globals are broken on a whole new level of broken
+        VoiceCommands.programRunning = False
     
     # 
     # Game commands
@@ -27,8 +28,12 @@ class VoiceCommands:
     # Navigate to the single player hero selection screen
     def singlePlayer(self):
         self.mouseControl.clickFraction(0.5, 0.35)
-        time.sleep(5)
-        self.mouseControl.clickFraction(0.75, 0.2)
+
+    def selectDifficulty(self, difficulty):
+        if (difficulty == "normal"):
+            self.mouseControl.clickFraction(0.75, 0.2)
+        else:
+            self.mouseControl.clickFraction(0.75, 0.27)
         time.sleep(0.1)
         self.mouseControl.clickFraction(0.75, 0.85)
         time.sleep(1)
@@ -54,6 +59,8 @@ class VoiceCommands:
         elif (number == 9):
             self.mouseControl.clickFraction(0.5, 0.7)
             time.sleep(0.1)
+            
+        self.mouseControl.clickFraction(0.75, 0.85)
             
 
     # Select enemy

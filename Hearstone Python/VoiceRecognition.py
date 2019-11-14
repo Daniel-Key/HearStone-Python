@@ -40,9 +40,18 @@ class VoiceRecognition:
         # Menu commands
         #
 
-        # Navigate from main menu to single player deck selection
+        # Navigate from main menu to single player difficulty selection
         elif (phrase == "single player"):
             self.voiceCommands.singlePlayer()
+
+        # Select single player difficulty
+        elif ("difficulty" in phrase):
+            if ("normal" in phrase):
+                self.voiceCommands.selectDifficulty("normal")
+            elif ("expert" in phrase):
+                self.voiceCommands.selectDifficulty("expert")
+            else:
+                print("difficulty not recognised")
         
         # Select deck
         elif ("deck" in phrase or "dick" in phrase or "next" in phrase or "text" in phrase or "tech" in phrase or "EK" in phrase or "Jet" in phrase):
@@ -78,7 +87,7 @@ class VoiceRecognition:
             self.voiceCommands.selectDeck(6)
         elif ("dec7" in phrase):
             self.voiceCommands.selectDeck(4)
-        elif ("dec8" in phrase):
+        elif ("dec8" in phrase or "decade" in phrase):
             self.voiceCommands.selectDeck(5)
         elif ("dec9" in phrase):
             self.voiceCommands.selectDeck(6)
@@ -87,7 +96,7 @@ class VoiceRecognition:
         elif ("opponent" in phrase or "appointment" in phrase or "exponent" in phrase):
             if ("1" in phrase):
                 self.voiceCommands.selectOpponent(1)
-            elif ("2" in phrase or "two" in phrase):
+            elif ("2" in phrase or "two" in phrase or "to" in phrase):
                 self.voiceCommands.selectOpponent(2)
             elif ("3" in phrase or "three" in phrase or "free" in phrase):
                 self.voiceCommands.selectOpponent(3)

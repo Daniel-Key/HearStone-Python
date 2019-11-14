@@ -6,14 +6,7 @@ import MouseControl
 import VoiceCommands
 import keyboard
 
-class Main:
-    api = API.API()
-    gameState = GameState.GameState()
-    logParser = LogParser.LogParser()
-    voiceRecognition = VoiceRecognition.VoiceRecognition()
-    mouseControl = MouseControl.MouseControl()
-    voiceCommands = VoiceCommands.VoiceCommands()
-    programRunning = True
+class Main():
 
     # logParser.checkForLogFileUpdates()
     # print(voiceRecognition.recognise())
@@ -21,21 +14,35 @@ class Main:
     # mouseControl.clickFraction(0.1, 0.1)
     # voiceCommands.endTurn()
 
-    while (programRunning):
-        logParser.checkForLogFileUpdates()
+    api = API.API()
+    gameState = GameState.GameState()
+    logParser = LogParser.LogParser()
+    voiceRecognition = VoiceRecognition.VoiceRecognition()
+    mouseControl = MouseControl.MouseControl()
+    voiceCommands = VoiceCommands.VoiceCommands()
 
-        try:  
-            if keyboard.is_pressed(' '): 
-                print("check")
-                voiceRecognition.takeInput()
-            elif keyboard.is_pressed('q'):
-                print("quit")
+    def loop(self):
+        while (self.voiceCommands.programRunning): 
+            self.logParser.checkForLogFileUpdates()
+
+            try:  
+                if keyboard.is_pressed(' '): 
+                    print("check")
+                    self.voiceRecognition.takeInput()
+                elif keyboard.is_pressed('q'):
+                    print("quit")
+                    break
+                else:
+                    pass
+            except:
+                print("ERROR- program exiting")
                 break
-            else:
-                pass
-        except:
-            print("Program exiting")
-            break
+        
+        print("Program exiting")
+
+
+main = Main()
+main.loop()
 
         
 

@@ -1,9 +1,11 @@
 import GameState
 import API
 class LogParser():
-    path = "D:/Hearthstone/Logs/Power.log"
+    # path = "D:/Hearthstone/Logs/Power.log"
+    path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
     logLength = 0
     optionList = []
+    gameState = GameState.GameState()
 
     # Process log file line
     def processLogFileLine(self, line) :
@@ -11,9 +13,7 @@ class LogParser():
             self.optionList.append(line)
         if ("BLOCK_START" in line) :
             if (len(self.optionList) != 0):
-                Main.programRunning = True
-                # Why does the one above work but not this one
-                # Main.gameState.handCards(optionList)
+                self.gameState.calculateHandCards(self.optionList)
                 # optionList.clear();
                 i=0
         if ("SHOW_ENTITY - Updating Entity=[entityName=UNKNOWN ENTITY [cardType=INVALID]" in line):

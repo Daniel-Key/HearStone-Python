@@ -4,5 +4,6 @@ class GameState:
     mulliganList = []
     handCards = []
 
-    def handCards(self, optionList):
-        handCards.clear()
+    def calculateHandCards(self, optionList):
+        self.handCards.clear()
+        

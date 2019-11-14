@@ -14,8 +14,7 @@ class LogParser():
         if ("BLOCK_START" in line) :
             if (len(self.optionList) != 0):
                 self.gameState.calculateHandCards(self.optionList)
-                # optionList.clear();
-                i=0
+                self.optionList.clear()
         if ("SHOW_ENTITY - Updating Entity=[entityName=UNKNOWN ENTITY [cardType=INVALID]" in line):
             GameState.mulliganInProgress = True
             cardIdIndex = line.index("CardID=") + 7
@@ -40,3 +39,4 @@ class LogParser():
             # If line has not yet been processed
             if (thisLength > self.logLength):
                 self.processLogFileLine(line)
+                LogParser.logLength = thisLength

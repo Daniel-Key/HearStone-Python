@@ -40,12 +40,12 @@ class MouseControl:
 
     def focusWindow(self):
         self.w.find_window_wildcard(".*Hearthstone.*")
+        time.sleep(0.05)
         self.w.set_foreground()
     
     def click(self,x,y):
         pyautogui.click(x, y)
   
     def clickFraction(self,x,y):
-        self.focusWindow()
-        time.sleep(0.05)
+        # self.focusWindow()
         pyautogui.click(self.screensize[0]*x, self.screensize[1]*y)

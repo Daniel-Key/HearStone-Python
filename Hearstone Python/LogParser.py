@@ -4,7 +4,6 @@ class LogParser():
     path = "D:/Hearthstone/Logs/Power.log"
     logLength = 0
     optionList = []
-    api = API.API()
 
     # Process log file line
     def processLogFileLine(self, line) :
@@ -12,7 +11,9 @@ class LogParser():
             self.optionList.append(line)
         if ("BLOCK_START" in line) :
             if (len(self.optionList) != 0):
-                # GameState.handCards(optionList);
+                Main.programRunning = True
+                # Why does the one above work but not this one
+                # Main.gameState.handCards(optionList)
                 # optionList.clear();
                 i=0
         if ("SHOW_ENTITY - Updating Entity=[entityName=UNKNOWN ENTITY [cardType=INVALID]" in line):
@@ -21,8 +22,8 @@ class LogParser():
             cardID = line[cardIdIndex:]
             cardID = cardID[:len(cardID)-1]
             # String cardInfo = API.callAPI(cardID);
-            requestCardInfo = self.api.requestCardInfo
-            cardInfo = requestCardInfo(cardID)
+            # requestCardInfo = Main.api.requestCardInfo
+            # cardInfo = requestCardInfo(cardID)
             #print(cardInfo)
             # mulliganList.add(cardInfo);
             # String card = cardInfo.substring(cardInfo.indexOf("cardId"));

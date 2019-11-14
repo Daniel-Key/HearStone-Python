@@ -9,7 +9,6 @@ class API:
         }
 
     def requestCardInfo(self, id):
-
         response = requests.request("GET", self.url + id, headers=self.headers)
         # print(id)
         # print(self.url + str(id))

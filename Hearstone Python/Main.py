@@ -1,11 +1,13 @@
 import API
 import GameState
-import LogParser
+import MyLogParser
 import VoiceRecognition
 import MouseControl
 import VoiceCommands
 import Instance
 import keyboard
+
+# from hslog import LogParser
 
 # logParser.checkForLogFileUpdates()
 # print(voiceRecognition.recognise())
@@ -17,7 +19,7 @@ instance = Instance.Instance()
 
 def loop():
     while (VoiceCommands.programRunning): 
-        LogParser.checkForLogFileUpdates(instance)
+        # MyLogParser.checkForLogFileUpdates(instance)
 
         try:  
             if keyboard.is_pressed(' '): 
@@ -35,7 +37,3 @@ def loop():
     print("Program exiting")
 
 loop()
-
-        
-
-    

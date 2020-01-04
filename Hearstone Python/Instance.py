@@ -1,6 +1,6 @@
 class Instance:
     #
-    # LogParser
+    # MyLogParser
     #
     logLength = 0
     optionList = []
@@ -8,6 +8,8 @@ class Instance:
     #
     # GameState
     #
+    # preMulligan = False
+    # preMulliganList = []
     mulliganInProgress = False
     mulliganComplete = False
     #Contains full card info

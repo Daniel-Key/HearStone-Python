@@ -1,4 +1,4 @@
-import LogParser
+import MyLogParser
 import API
 
 def calculateHandCards(instance, optionList):
@@ -11,10 +11,10 @@ def calculateHandCards(instance, optionList):
             
             #If the line doesn't contain the card ID, search the log for it
             if (cardID == ""):
-                logID = line[line.index("id=") : line.index("zone=") - 1]
-                cardID = LogParser.lookupCardID(logID)
+                logID = line[line.index("id=") : line.index("zone=")]
+                cardID = MyLogParser.lookupCardID(logID)
                 #The zonePos number will also be incorrect so search the log for this too
-                zonePos = int(LogParser.lookupZonePos(logID))
+                zonePos = int(MyLogParser.lookupZonePos(logID))
 
             if cardID in instance.cardApiInfo:
                 cardInfo = instance.cardApiInfo[cardID]
@@ -40,6 +40,6 @@ def calculateHandCards(instance, optionList):
         card = cardInfo[cardInfo.index("cardId"):]
         print(card[card.index("name") + 7 : card.index("cardSet") - 3])
     print()
-            
+    
     
 # TO DO: Look a bit more into existing log parser, could save some time

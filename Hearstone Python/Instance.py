@@ -1,10 +1,16 @@
 class Instance:
-    #LogParser
+    #
+    # LogParser
+    #
     logLength = 0
     optionList = []
 
-    #GameState
+    #
+    # GameState
+    #
     mulliganInProgress = False
     mulliganComplete = False
+    #Contains full card info
     mulliganList = []
-    handCards = []
+    handCards = dict()
+    cardApiInfo = {}

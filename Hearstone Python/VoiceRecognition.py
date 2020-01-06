@@ -16,9 +16,11 @@ def recognise() :
         text = "error"
     return text
 
-def takeInput():
+def takeInput(instance):
     phrase = recognise()
     print("Recognised: " + phrase)
+
+    phrase = phrase.lower()
 
     # 
     # General commands
@@ -31,7 +33,7 @@ def takeInput():
     # Gameplay commands
     #
 
-    elif (phrase == "end turn" or phrase == "and turn" or phrase == "entertain" or phrase == "nth term" or phrase == "Anton"):
+    elif (phrase == "end turn" or phrase == "and turn" or phrase == "entertain" or phrase == "nth term" or phrase == "anton"):
         VoiceCommands.endTurn()
 
     # 
@@ -52,7 +54,7 @@ def takeInput():
             print("difficulty not recognised")
     
     # Select deck
-    elif ("deck" in phrase or "dick" in phrase or "next" in phrase or "text" in phrase or "tech" in phrase or "EK" in phrase or "Jet" in phrase):
+    elif ("deck" in phrase or "dick" in phrase or "next" in phrase or "text" in phrase or "tech" in phrase or "ek" in phrase or "jet" in phrase):
         if ("1" in phrase or "one" in phrase):
             VoiceCommands.selectDeck(1)
         elif ("2" in phrase or "two" in phrase or "too" in phrase or "to" in phrase):
@@ -75,7 +77,7 @@ def takeInput():
         VoiceCommands.selectDeck(1)
     elif ("dec2" in phrase or "bectu" in phrase):
         VoiceCommands.selectDeck(2)
-    elif ("dec3" in phrase or "Dec free" in phrase):
+    elif ("dec3" in phrase or "dec free" in phrase):
         VoiceCommands.selectDeck(3)
     elif ("dec4" in phrase):
         VoiceCommands.selectDeck(4)
@@ -112,5 +114,31 @@ def takeInput():
             VoiceCommands.selectOpponent(9)
 
     # Play game
-    elif ("play game" in phrase):
+    elif ("play" in phrase and "game" in phrase):
         VoiceCommands.playGame()
+
+
+    # Play card
+    elif ("play card" in phrase or "play cod" in phrase or "play clyde" in phrase):
+        if ("1" in phrase or "one" in phrase):
+            VoiceCommands.playCard(instance, 1)
+        elif ("2" in phrase or "two" in phrase or "to" in phrase):
+            VoiceCommands.playCard(instance, 2)
+        elif ("3" in phrase or "three" in phrase or "free" in phrase):
+            VoiceCommands.playCard(instance, 3)
+        elif ("4" in phrase or "four" in phrase or "for" in phrase):
+            VoiceCommands.playCard(instance, 4)
+        elif ("5" in phrase or "five" in phrase):
+            VoiceCommands.playCard(instance, 5)
+        elif ("6" in phrase or "six" in phrase):
+            VoiceCommands.playCard(instance, 6)
+        elif ("7" in phrase or "seven" in phrase or "for" in phrase):
+            VoiceCommands.playCard(instance, 7)
+        elif ("8" in phrase or "eight" in phrase):
+            VoiceCommands.playCard(instance, 8)
+        elif ("9" in phrase or "nine" in phrase): 
+            VoiceCommands.playCard(instance, 9)
+        elif ("10" in phrase or "ten" in phrase):
+            VoiceCommands.playCard(instance, 10)
+    elif ("play cartoon" in phrase):
+        VoiceCommands.playCard(instance, 2)

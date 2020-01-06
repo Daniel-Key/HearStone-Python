@@ -15,7 +15,8 @@ def processLogFileLine(instance, line) :
         instance.optionList.append(line)
     if ("BLOCK_START" in line or "Block Start=(null)" in line) :
         if (len(instance.optionList) != 0):
-            GameState.calculateHandCards(instance, instance.optionList)
+            GameState.calculateHandCards(instance)
+            GameState.calculateBoardMinions(instance)
             instance.optionList.clear()
     # if ("-   Entities" in line):
     #     if (instance.preMulligan == True or len(instance.preMulliganList) == 0):
@@ -32,14 +33,16 @@ def processLogFileLine(instance, line) :
             cardInfo = API.requestCardInfo(cardID)
             instance.cardApiInfo[cardID] = cardInfo
         instance.mulliganList.append(cardInfo)
+    # if ("tag=LAST_CARD_PLAYED" in line):
+    #     instance.lastCardPlayed = line
     if ("PowerTaskList.DebugPrintPower() -     TAG_CHANGE Entity=GameEntity tag=NEXT_STEP value=BEGIN_MULLIGAN" in line):
         instance.mulliganComplete = True
         # for i in instance.preMulliganList:
         #     print(i[i.index("entityName=") + 11 : i.index(" id=")])
-        for i in instance.mulliganList:
-            card = i[i.index("cardId"):]
-            print(card[card.index("name") + 7 : card.index("cardSet") - 3])
-        print()
+        # for i in instance.mulliganList:
+        #     card = i[i.index("cardId"):]
+        #     print(card[card.index("name") + 7 : card.index("cardSet") - 3])
+        # print()
 
 # Will be in main loop looking for game state changes
 def checkForLogFileUpdates(instance):

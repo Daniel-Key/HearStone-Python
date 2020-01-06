@@ -7,7 +7,17 @@ import VoiceCommands
 import Instance
 import keyboard
 
-# from hslog import LogParser
+# hslog stuff
+# from datetime import datetime, time, timedelta
+# from io import StringIO
+# from aniso8601 import parse_datetime
+# from hearthstone.enums import (
+# 	CardType, ChoiceType, GameTag, OptionType,
+# 	PlayReq, PlayState, PowerType, State, Step, Zone
+# )
+# from hslog import LogParser, packets
+# from hslog.exceptions import ParsingError
+# from hslog.parser import parse_initial_tag
 
 # logParser.checkForLogFileUpdates()
 # print(voiceRecognition.recognise())
@@ -19,12 +29,12 @@ instance = Instance.Instance()
 
 def loop():
     while (VoiceCommands.programRunning): 
-        # MyLogParser.checkForLogFileUpdates(instance)
+        MyLogParser.checkForLogFileUpdates(instance)
 
         try:  
             if keyboard.is_pressed(' '): 
                 print("check")
-                VoiceRecognition.takeInput()
+                VoiceRecognition.takeInput(instance)
             elif keyboard.is_pressed('q'):
                 print("quit")
                 break
@@ -37,3 +47,28 @@ def loop():
     print("Program exiting")
 
 loop()
+
+# import ctypes
+# user32 = ctypes.windll.user32
+# screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+# import pyautogui
+# print(pyautogui.position().x / screensize[0])
+# print(pyautogui.position().y / screensize[1])
+
+
+
+
+
+
+
+
+
+
+
+# parser = LogParser()
+# for line in open("D:/Hearthstone/Logs/Power.log"):
+#     parser.read_line(line)
+# parser.flush()
+
+# packet_tree = parser.games[0]
+# game = packet_tree.export().game

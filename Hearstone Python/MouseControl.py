@@ -9,6 +9,9 @@ screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 def click(x, y):
     pyautogui.click(x, y)
 
+def rightClick():
+    pyautogui.click(pyautogui.position().x, pyautogui.position().y, button='right')
+
 def clickFraction(x, y):
     pyautogui.click(screensize[0]*x, screensize[1]*y)
 

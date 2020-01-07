@@ -83,7 +83,7 @@ def selectOpponent(number):
 
 
 # Play game
-def playGame():
+def startGame():
     MouseControl.moveClickFraction(0.75, 0.85)
 
 def playCardMouseFraction(x, y):
@@ -476,7 +476,7 @@ def attack(instance, friendlyNumber, enemyNumber):
 def face(instance):
     for i in range(len(instance.friendlyMinions)):
         attack(instance, i+1, 0)
-        time.sleep(1)
+        # time.sleep(0.25)
 
 
 #Target card
@@ -732,3 +732,50 @@ def target(instance, targetNo, friendly):
             
         MouseControl.moveClickFraction(x2, y2)
 
+
+#Make mulligan choices
+def mulligan(instance, cards):
+    if (len(instance.mulliganList) == 3):
+        if (1 in cards):
+            MouseControl.moveClickFraction(0.32, 0.47)
+        if (2 in cards):
+            MouseControl.moveClickFraction(0.5, 0.47)
+        if (3 in cards):
+            MouseControl.moveClickFraction(0.68, 0.47)
+    else:
+        if (1 in cards):
+            MouseControl.moveClickFraction(0.3, 0.47)
+        if (2 in cards):
+            MouseControl.moveClickFraction(0.44, 0.47)
+        if (3 in cards):
+            MouseControl.moveClickFraction(0.57, 0.47)
+        if (4 in cards):
+            MouseControl.moveClickFraction(0.70, 0.47)
+
+
+#Confirm mulligan choices
+def mulliganConfirm():
+    MouseControl.moveClickFraction(0.5, 0.79)
+
+
+#Use hero power
+def heroPower():
+    MouseControl.moveClickFraction(0.59, 0.75)
+
+
+#Discover card (only works with 3 currently)
+def discover(number):
+    #Show/hide options
+    if (number == -1):
+        MouseControl.moveClickFraction(0.28, 0.76)
+    elif (number == 1):
+        MouseControl.moveClickFraction(0.29, 0.49)
+    elif (number == 2):
+        MouseControl.moveClickFraction(0.5, 0.49)
+    elif (number == 3):
+        MouseControl.moveClickFraction(0.71, 0.49)
+
+
+#Cancel targeted card
+def cancel():
+    MouseControl.rightClick()

@@ -113,12 +113,13 @@ def takeInput(instance):
         elif ("9" in phrase or "nine" in phrase):
             VoiceCommands.selectOpponent(9)
 
-    # Play game
-    elif ("play" in phrase and "game" in phrase):
-        VoiceCommands.playGame()
+    # Start game
+    elif ("start" in phrase and "game" in phrase):
+        VoiceCommands.startGame()
 
     # Play card
-    elif ("play card" in phrase or "play cod" in phrase or "play clyde" in phrase or "play cars" in phrase or "play hard" in phrase):
+    # elif ("play card" in phrase or "play cod" in phrase or "play clyde" in phrase or "play cars" in phrase or "play hard" in phrase):
+    elif ("play" in phrase):
         if ("1" in phrase or "one" in phrase):
             VoiceCommands.playCard(instance, 1)
         elif ("2" in phrase or "two" in phrase or "to" in phrase):
@@ -143,7 +144,7 @@ def takeInput(instance):
         VoiceCommands.playCard(instance, 2)
 
     # Attack with minion or hero
-    elif ("attack" in phrase or "a tack" in phrase):
+    elif ("attack" in phrase or "a tack" in phrase or "tech" in phrase):
         friendlyNo = -1
         enemyNo = -1
         if ("friendly 0" in phrase or "friendly zero" in phrase):
@@ -169,27 +170,27 @@ def takeInput(instance):
         elif ("friendly 10" in phrase or "friendly ten" in phrase):
             friendlyNo = 10
 
-        if ("enemy 0" in phrase or "enemy zero" in phrase):
+        if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
             enemyNo = 0
-        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase):
+        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase or "anime 1" in phrase or "anime one" in phrase):
             enemyNo = 1
-        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase):
+        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase or "anime 2" in phrase or "anime two" in phrase or "anime to" in phrase):
             enemyNo = 2
-        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase):
+        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase or "anime 3" in phrase or "anime three" in phrase or "anime free" in phrase):
             enemyNo = 3
-        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase):
+        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase or "anime 4" in phrase or "anime four" in phrase or "anime for" in phrase):
             enemyNo = 4
-        elif ("enemy 5" in phrase or "enemy five" in phrase):
+        elif ("enemy 5" in phrase or "enemy five" in phrase or "anime 5" in phrase or "anime five" in phrase):
             enemyNo = 5
-        elif ("enemy 6" in phrase or "enemy six" in phrase):
+        elif ("enemy 6" in phrase or "enemy six" in phrase or "anime 6" in phrase or "anime six" in phrase):
             enemyNo = 6
-        elif ("enemy 7" in phrase or "enemy seven" in phrase):
+        elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
             enemyNo = 7
-        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase):
+        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase or "anime 8" in phrase or "anime eight" in phrase or "anime ate" in phrase):
             enemyNo = 8
-        elif ("enemy 9" in phrase or "enemy nine" in phrase):
+        elif ("enemy 9" in phrase or "enemy nine" in phrase or "anime 9" in phrase or "anime nine" in phrase):
             enemyNo = 9
-        elif ("enemy 10" in phrase or "enemy ten" in phrase):
+        elif ("enemy 10" in phrase or "enemy ten" in phrase or "anime 10" in phrase or "anime ten" in phrase):
             enemyNo = 10
 
         if (friendlyNo != -1 and enemyNo != -1):
@@ -235,41 +236,80 @@ def takeInput(instance):
             friendly = True
         elif ("friendly 10" in phrase or "friendly ten" in phrase):
             targetNo = 10
-            friendly = True
-
-        if ("enemy 0" in phrase or "enemy zero" in phrase):
+            friendly = True            
+        
+        if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
             targetNo = 0
             friendly = False
-        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase):
+        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase or "anime 1" in phrase or "anime one" in phrase):
             targetNo = 1
             friendly = False
-        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase):
+        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase or "anime 2" in phrase or "anime two" in phrase or "anime to" in phrase):
             targetNo = 2
             friendly = False
-        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase):
+        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase or "anime 3" in phrase or "anime three" in phrase or "anime free" in phrase):
             targetNo = 3
             friendly = False
-        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase):
+        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase or "anime 4" in phrase or "anime four" in phrase or "anime for" in phrase):
             targetNo = 4
             friendly = False
-        elif ("enemy 5" in phrase or "enemy five" in phrase):
+        elif ("enemy 5" in phrase or "enemy five" in phrase or "anime 5" in phrase or "anime five" in phrase):
             targetNo = 5
             friendly = False
-        elif ("enemy 6" in phrase or "enemy six" in phrase):
+        elif ("enemy 6" in phrase or "enemy six" in phrase or "anime 6" in phrase or "anime six" in phrase):
             targetNo = 6
             friendly = False
-        elif ("enemy 7" in phrase or "enemy seven" in phrase):
+        elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
             targetNo = 7
             friendly = False
-        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase):
+        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase or "anime 8" in phrase or "anime eight" in phrase or "anime ate" in phrase):
             targetNo = 8
             friendly = False
-        elif ("enemy 9" in phrase or "enemy nine" in phrase):
+        elif ("enemy 9" in phrase or "enemy nine" in phrase or "anime 9" in phrase or "anime nine" in phrase):
             targetNo = 9
             friendly = False
-        elif ("enemy 10" in phrase or "enemy ten" in phrase):
+        elif ("enemy 10" in phrase or "enemy ten" in phrase or "anime 10" in phrase or "anime ten" in phrase):
             targetNo = 10
             friendly = False
 
         if (targetNo != -1):
             VoiceCommands.target(instance, targetNo, friendly)
+
+    # Make mulligan choices
+    elif ("mulligan" in phrase or "Milligan" in phrase):
+        if ("confirm" in phrase):
+            VoiceCommands.mulliganConfirm()
+        else:
+            cards = []
+            if ("1" in phrase or "one" in phrase):
+                cards.append(1)
+            if ("2" in phrase or "two" in phrase or "to" in phrase):
+                cards.append(2)
+            if ("3" in phrase or "three" in phrase or "free" in phrase):
+                cards.append(3)
+            if ("4" in phrase or "four" in phrase or "for" in phrase):
+                cards.append(4)
+            VoiceCommands.mulligan(instance, cards)
+
+    # Hero power
+    elif ("hero power" in phrase):
+        VoiceCommands.heroPower()
+
+
+    # Choose from discover
+    elif ("choose" in phrase or "cheese" in phrase):
+        if ("hide" in phrase or "show" in phrase):
+            VoiceCommands.discover(-1)
+        else:
+            if ("1" in phrase or "one" in phrase):
+                    VoiceCommands.discover(1)
+            if ("2" in phrase or "two" in phrase or "to" in phrase):
+                VoiceCommands.discover(2)
+            if ("3" in phrase or "three" in phrase or "free" in phrase):
+                VoiceCommands.discover(3)
+    elif ("shrewsbury" in phrase):
+        VoiceCommands.discover(3)
+
+    # Cancel targeted card
+    elif ("cancel" in phrase):
+        VoiceCommands.cancel()

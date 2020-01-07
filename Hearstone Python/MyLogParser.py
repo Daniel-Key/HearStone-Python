@@ -9,6 +9,8 @@ def processLogFileLine(instance, line) :
     # if (instance.preMulligan):
     #     if ("Block Start=(null)" in line):
     #         instance.preMulligan = False
+    if ("PlayerID=1, PlayerName=" in line):
+        instance.playerName = line[line.index("Name=")+5:-1]
     if ("option " in line) :
         if ("option 0 " in line and len(instance.optionList) != 0):
             instance.optionList.clear()
@@ -33,8 +35,8 @@ def processLogFileLine(instance, line) :
             cardInfo = API.requestCardInfo(cardID)
             instance.cardApiInfo[cardID] = cardInfo
         instance.mulliganList.append(cardInfo)
-    # if ("tag=LAST_CARD_PLAYED" in line):
-    #     instance.lastCardPlayed = line
+    if ("tag=LAST_CARD_PLAYED" in line and instance.playerName in line):
+        instance.lastCardPlayedID = int(line[line.index("value=") + 6:])
     if ("PowerTaskList.DebugPrintPower() -     TAG_CHANGE Entity=GameEntity tag=NEXT_STEP value=BEGIN_MULLIGAN" in line):
         instance.mulliganComplete = True
         # for i in instance.preMulliganList:

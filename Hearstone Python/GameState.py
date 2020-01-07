@@ -43,9 +43,30 @@ def calculateHandCards(instance):
 
 
 def calculateBoardMinions(instance):
+    instance.friendlyMinions.clear()
+    instance.enemyMinions.clear()
     for line in instance.optionList:
         if ("error=REQ_NOT_MINION_JUST_PLAYED" in line):
-            print(line)
+            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+            instance.friendlyMinions.append(cardID)
+        elif ("zone=PLAY" in line and ("REQ_NOT_EXHAUSTED_ACTIVATE" in line or "error=REQ_ATTACKER_NOT_FROZEN " in line or "error=NONE" in line) and not "zonePos=0" in line and "player=1" in line):
+            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+            instance.friendlyMinions.append(cardID)
+        elif ("zonePos=0" not in line and "player=2" in line):
+            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+            if (cardID == ""):
+                logID = line[line.index("id=") : line.index("zone=")]
+                cardID = MyLogParser.lookupCardID(logID)
+            instance.enemyMinions.append(cardID)
+        elif ("type=END_TURN" not in line):
+            logID = int(line[line.index("id=") + 3 : line.index("zone=") - 1])
+            if (logID == instance.lastCardPlayedID):
+                cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+                instance.friendlyMinions.append(cardID)
+
+    print(instance.friendlyMinions)
+    print(instance.enemyMinions)
+    print()
 
 def getHandSize(instance):
     return len(instance.handCards)

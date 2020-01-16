@@ -325,23 +325,77 @@ def controlCommand(instance, phrase):
 def feedbackCommand(instance, phrase):
     print()
 
+    #Speaking hand cards
     if ("hand" in phrase or "and" in phrase):
         if ("all" in phrase):
-            VoiceCommands.readAllHandCards(instance)
+            VoiceCommands.speakAllHandCards(instance)
         elif ((len(instance.handCards) > 0) and (("one" in phrase) or ("1" in phrase))):
             line = instance.handCards[0]
-            VoiceCommands.readCardName(instance, line)
+            VoiceCommands.speakString(instance, line)
         elif ((len(instance.handCards) > 1) and (("two" in phrase) or ("2" in phrase) or ("too" in phrase) or ("to" in phrase))):
             line = instance.handCards[1]
-            VoiceCommands.readCardName(instance, line)
+            VoiceCommands.speakString(instance, line)
         elif ((len(instance.handCards) > 2) and (("three" in phrase) or ("3" in phrase) or ("free" in phrase))):
             line = instance.handCards[2]
-            VoiceCommands.readCardName(instance, line)
+            VoiceCommands.speakString(instance, line)
         elif ((len(instance.handCards) > 3) and (("four" in phrase) or ("4" in phrase) or ("for" in phrase))):
             line = instance.handCards[3]
-            VoiceCommands.readCardName(instance, line)
-        
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 4) and (("five" in phrase) or ("5" in phrase))):
+            line = instance.handCards[4]
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 5) and (("six" in phrase) or ("6" in phrase))):
+            line = instance.handCards[5]
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 6) and (("seven" in phrase) or ("7" in phrase))):
+            line = instance.handCards[6]
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 7) and (("eight" in phrase) or ("8" in phrase) or ("ate" in phrase))):
+            line = instance.handCards[7]
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 8) and (("nine" in phrase) or ("9" in phrase))):
+            line = instance.handCards[8]
+            VoiceCommands.speakString(instance, line) 
+        elif ((len(instance.handCards) > 9) and (("ten" in phrase) or ("10" in phrase))):
+            line = instance.handCards[9]
+            VoiceCommands.speakString(instance, line) 
     elif ("handle" in phrase):
-        VoiceCommands.readAllHandCards(instance)
+        VoiceCommands.speakAllHandCards(instance)
 
+
+    #Speaking board minions
+    elif ("board" in phrase or "bored" in phrase or "old" in phrase):
+        if ("all" in phrase or "lol" in phrase):
+    # elif ("potato" in phrase):
+            VoiceCommands.speakAllBoardMinions(instance)
+            
+        elif ((len(instance.friendlyMinions) > 0) and (("friendly one" in phrase) or ("friendly 1" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 1)
+        elif ((len(instance.friendlyMinions) > 1) and (("friendly two" in phrase) or ("friendly 2" in phrase) or ("friendly too" in phrase) or ("friendly to" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 2)
+        elif ((len(instance.friendlyMinions) > 2) and (("friendly three" in phrase) or ("friendly 3" in phrase) or ("friendly free" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 3)
+        elif ((len(instance.friendlyMinions) > 3) and (("friendly four" in phrase) or ("friendly 4" in phrase) or ("friendly for" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 4)
+        elif ((len(instance.friendlyMinions) > 4) and (("friendly five" in phrase) or ("friendly 5" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 5)
+        elif ((len(instance.friendlyMinions) > 5) and (("friendly six" in phrase) or ("friendly 6" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 6)
+        elif ((len(instance.friendlyMinions) > 6) and (("friendly seven" in phrase) or ("friendly 7" in phrase))):
+            VoiceCommands.speakFriendlyBoardMinion(instance, 7)
+
+        elif ((len(instance.enemyMinions) > 0) and (("enemy one" in phrase) or ("enemy 1" in phrase) or ("anime one" in phrase) or ("anime 1" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 1)
+        elif ((len(instance.enemyMinions) > 1) and (("enemy two" in phrase) or ("enemy 2" in phrase) or ("enemy too" in phrase) or ("enemy to" in phrase) or ("anime two" in phrase) or ("anime 2" in phrase) or ("anime too" in phrase) or ("anime to" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 2)
+        elif ((len(instance.enemyMinions) > 2) and (("enemy three" in phrase) or ("enemy 3" in phrase) or ("enemy free" in phrase) or ("anime three" in phrase) or ("anime 3" in phrase) or ("anime free" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 3)
+        elif ((len(instance.enemyMinions) > 3) and (("enemy four" in phrase) or ("enemy 4" in phrase) or ("enemy for" in phrase) or ("anime four" in phrase) or ("anime 4" in phrase) or ("anime for" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 4)
+        elif ((len(instance.enemyMinions) > 4) and (("enemy five" in phrase) or ("enemy 5" in phrase) or ("anime five" in phrase) or ("anime 5" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 5)
+        elif ((len(instance.enemyMinions) > 5) and (("enemy six" in phrase) or ("enemy 6" in phrase) or ("anime six" in phrase) or ("anime 6" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 6)
+        elif ((len(instance.enemyMinions) > 6) and (("enemy seven" in phrase) or ("enemy 7" in phrase) or ("anime seven" in phrase) or ("anime 7" in phrase))):
+            VoiceCommands.speakEnemyBoardMinion(instance, 7)
     print()

@@ -1,4 +1,5 @@
 import MouseControl
+import API
 import time
 
 from gtts import gTTS 
@@ -800,15 +801,69 @@ def cancel():
 # Auditory feedback
 #
 
-def readCardName(instance, line):
-    name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
-    print(name)
-    speech = gTTS(text = name, lang = "en", slow = False)
+def speakString(instance, line):
+    print(line)
+    speech = gTTS(text = line, lang = "en", slow = False)
     speech.save("text.mp3")
     playsound.playsound("text.mp3", True)
     os.remove("text.mp3")
 
-def readAllHandCards(instance):
+def speakCardName(instance, line):
+    name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
+    speakString(instance, name)
+
+def speakAllHandCards(instance):
     for i in instance.handCards:
         line = instance.handCards[i]
-        readCardName(instance, line)
+        speakCardName(instance, line)
+
+def speakFriendlyBoardMinion(instance, number):
+    cardID = instance.friendlyMinions[number-1]
+    cardInfo = ""
+
+    if cardID in instance.cardApiInfo:
+        cardInfo = instance.cardApiInfo[cardID]
+    else:
+        cardInfo = API.requestCardInfo(cardID)
+        instance.cardApiInfo[cardID] = cardInfo
+
+    speakCardName(instance, cardInfo)
+
+def speakEnemyBoardMinion(instance, number):
+    cardID = instance.enemyMinions[number-1]
+    cardInfo = ""
+
+    if cardID in instance.cardApiInfo:
+        cardInfo = instance.cardApiInfo[cardID]
+    else:
+        cardInfo = API.requestCardInfo(cardID)
+        instance.cardApiInfo[cardID] = cardInfo
+
+    speakCardName(instance, cardInfo)
+
+def speakAllBoardMinions(instance):
+    speakString(instance, "Friendly minions")
+    for i in range(len(instance.friendlyMinions)):
+        cardID = instance.friendlyMinions[i]
+        cardInfo = ""
+
+        if cardID in instance.cardApiInfo:
+            cardInfo = instance.cardApiInfo[cardID]
+        else:
+            cardInfo = API.requestCardInfo(cardID)
+            instance.cardApiInfo[cardID] = cardInfo
+
+        speakCardName(instance, cardInfo)
+        
+    speakString(instance, "Enemy minions")
+    for i in range(len(instance.enemyMinions)):
+        cardID = instance.enemyMinions[i]
+        cardInfo = ""
+
+        if cardID in instance.cardApiInfo:
+            cardInfo = instance.cardApiInfo[cardID]
+        else:
+            cardInfo = API.requestCardInfo(cardID)
+            instance.cardApiInfo[cardID] = cardInfo
+
+        speakCardName(instance, cardInfo)

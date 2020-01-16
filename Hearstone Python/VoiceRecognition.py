@@ -16,11 +16,18 @@ def recognise() :
         text = "error"
     return text
 
-def takeInput(instance):
+def takeInput(instance, control):
     phrase = recognise()
     print("Recognised: " + phrase)
 
     phrase = phrase.lower()
+
+    if (control == True):
+        controlCommand(instance, phrase)
+    else:
+        feedbackCommand(instance, phrase)
+
+def controlCommand(instance, phrase):
 
     # 
     # General commands
@@ -313,3 +320,19 @@ def takeInput(instance):
     # Cancel targeted card
     elif ("cancel" in phrase):
         VoiceCommands.cancel()
+
+
+def feedbackCommand(instance, phrase):
+    print()
+    if ("hand" in phrase or "and" in phrase):
+        if ("all" in phrase):
+            VoiceCommands.readAllHandCards(instance)
+        elif ((len(instance.handCards) > 0) and (("one" in phrase) or ("1" in phrase))):
+            line = instance.handCards[0]
+            VoiceCommands.readCardName(instance, line)
+
+    if ("handle" in phrase):
+        for i in instance.handCards:
+            line = instance.handCards[i]
+            VoiceCommands.readCardName(instance, line)
+    print()

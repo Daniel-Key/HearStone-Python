@@ -1,6 +1,10 @@
 import MouseControl
 import time
 
+from gtts import gTTS 
+import os
+import playsound
+
 programRunning = True
 
 #
@@ -91,6 +95,9 @@ def playCardMouseFraction(x, y):
     MouseControl.moveMouseUpFraction(0.5, 0.47)
 
 def playCard(instance, number):
+    # for i in instance.handCards:
+    #     print(i)
+    instance.lastCardPlayed = str(instance.handCards[number-1])
     if ((number > 10) or (number > len(instance.handCards))):
         print("Invalid card to play")
     elif (len(instance.handCards) == 1):
@@ -478,28 +485,32 @@ def face(instance):
         attack(instance, i+1, 0)
         # time.sleep(0.25)
 
-
 #Target card
 def target(instance, targetNo, friendly):
     if (friendly):
         if ((targetNo > 7) or (targetNo > len(instance.friendlyMinions))):
             print("Invalid friendly minion")
         else:
+            actualFriendlyMinionLen = -1
+            if ("\"type\":\"Minion\"" in instance.lastCardPlayed):
+                actualFriendlyMinionLen = len(instance.friendlyMinions) + 1
+            else:
+                actualFriendlyMinionLen = len(instance.friendlyMinions)
             x1 = -1
             y1 = -1
             #Friendly minion positions
-            if (len(instance.friendlyMinions) == 0):
+            if (actualFriendlyMinionLen == 0):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
-            elif (len(instance.friendlyMinions) == 1):
+            elif (actualFriendlyMinionLen == 1):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
                 elif (targetNo == 1):
                     x1 = 0.5
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 2):
+            elif (actualFriendlyMinionLen == 2):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -509,7 +520,7 @@ def target(instance, targetNo, friendly):
                 elif (targetNo == 2):
                     x1 = 0.54
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 3):
+            elif (actualFriendlyMinionLen == 3):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -522,7 +533,7 @@ def target(instance, targetNo, friendly):
                 elif (targetNo == 3):
                     x1 = 0.58
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 4):
+            elif (actualFriendlyMinionLen == 4):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -538,7 +549,7 @@ def target(instance, targetNo, friendly):
                 elif (targetNo == 4):
                     x1 = 0.61
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 5):
+            elif (actualFriendlyMinionLen == 5):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -557,7 +568,7 @@ def target(instance, targetNo, friendly):
                 elif (targetNo == 5):
                     x1 = 0.65
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 6):
+            elif (actualFriendlyMinionLen == 6):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -579,7 +590,7 @@ def target(instance, targetNo, friendly):
                 elif (targetNo == 6):
                     x1 = 0.68
                     y1 = 0.55
-            elif (len(instance.friendlyMinions) == 7):
+            elif (actualFriendlyMinionLen == 7):
                 if (targetNo == 0):
                     x1 = 0.5
                     y1 = 0.75
@@ -779,3 +790,25 @@ def discover(number):
 #Cancel targeted card
 def cancel():
     MouseControl.rightClick()
+
+
+
+
+
+
+#
+# Auditory feedback
+#
+
+def readCardName(instance, line):
+    name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
+    print(name)
+    speech = gTTS(text = name, lang = "en", slow = False)
+    speech.save("text.mp3")
+    playsound.playsound("text.mp3", True)
+    os.remove("text.mp3")
+
+def readAllHandCards(instance):
+    for i in instance.handCards:
+        line = instance.handCards[i]
+        readCardName(instance, line)

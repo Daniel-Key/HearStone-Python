@@ -6,8 +6,10 @@ def calculateHandCards(instance):
 
     for line in instance.optionList:
         if ((("zone=HAND" in line) or ("zone=DECK" in line)) and not (("error=REQ_NOT_MINION_JUST_PLAYED" in line) or ("error=REQ_YOUR_TURN" in line))):
-            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
             zonePos = int(line[line.index("zonePos=") + 8 : line.index("cardId=") - 1])
+            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+            # if (zonePos == 0):
+            #     print(line)
             
             #If the line doesn't contain the card ID, search the log for it
             if (cardID == ""):
@@ -24,8 +26,8 @@ def calculateHandCards(instance):
 
             #Checks that the zonePos isn't duplicate (occurs when drawing cards on turn), if it is adds the card to the end
             if ((zonePos-1 in instance.handCards) and (zonePos != 0)) :
-                instance.handCards[len(instance.handCards)+1] = cardInfo
-            else :
+                instance.handCards[len(instance.handCards)] = cardInfo
+            else:
                 instance.handCards[zonePos - 1] = cardInfo
 
     #Sorting dictionary in order

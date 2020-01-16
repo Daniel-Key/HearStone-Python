@@ -15,6 +15,7 @@ class Instance:
     #Contains full card info
     mulliganList = []
     handCards = dict()
+    lastCardPlayed = "None"
     cardApiInfo = {}
     friendlyMinions = []
     enemyMinions = []

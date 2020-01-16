@@ -34,7 +34,10 @@ def loop():
         try:  
             if keyboard.is_pressed(' '): 
                 print("check")
-                VoiceRecognition.takeInput(instance)
+                VoiceRecognition.takeInput(instance, True)
+            elif keyboard.is_pressed('\\'): 
+                print("check")
+                VoiceRecognition.takeInput(instance, False)
             elif keyboard.is_pressed('q'):
                 print("quit")
                 break

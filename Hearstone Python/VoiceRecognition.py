@@ -324,15 +324,24 @@ def controlCommand(instance, phrase):
 
 def feedbackCommand(instance, phrase):
     print()
+
     if ("hand" in phrase or "and" in phrase):
         if ("all" in phrase):
             VoiceCommands.readAllHandCards(instance)
         elif ((len(instance.handCards) > 0) and (("one" in phrase) or ("1" in phrase))):
             line = instance.handCards[0]
             VoiceCommands.readCardName(instance, line)
-
-    if ("handle" in phrase):
-        for i in instance.handCards:
-            line = instance.handCards[i]
+        elif ((len(instance.handCards) > 1) and (("two" in phrase) or ("2" in phrase) or ("too" in phrase) or ("to" in phrase))):
+            line = instance.handCards[1]
             VoiceCommands.readCardName(instance, line)
+        elif ((len(instance.handCards) > 2) and (("three" in phrase) or ("3" in phrase) or ("free" in phrase))):
+            line = instance.handCards[2]
+            VoiceCommands.readCardName(instance, line)
+        elif ((len(instance.handCards) > 3) and (("four" in phrase) or ("4" in phrase) or ("for" in phrase))):
+            line = instance.handCards[3]
+            VoiceCommands.readCardName(instance, line)
+        
+    elif ("handle" in phrase):
+        VoiceCommands.readAllHandCards(instance)
+
     print()

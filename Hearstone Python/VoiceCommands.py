@@ -43,7 +43,6 @@ def selectDifficulty(difficulty):
 def selectDeck(number):
     if (number == 1):
         MouseControl.moveClickFraction(0.25, 0.25)
-        #TO DO: DRAG AND DROP CARD
     elif (number == 2):
         MouseControl.moveClickFraction(0.4, 0.25)
     elif (number == 3):

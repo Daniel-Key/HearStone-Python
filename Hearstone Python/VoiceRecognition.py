@@ -40,7 +40,7 @@ def controlCommand(instance, phrase):
     # Gameplay commands
     #
 
-    elif (phrase == "end turn" or phrase == "and turn" or phrase == "entertain" or phrase == "nth term" or phrase == "anton" or phrase == "enstone" or phrase == "and 10" or phrase == "enter"):
+    elif (phrase == "end turn" or phrase == "and turn" or phrase == "entertain" or phrase == "nth term" or phrase == "anton" or phrase == "enstone" or phrase == "and 10" or phrase == "enter" or phrase == "end term"):
         VoiceCommands.endTurn()
 
     # 
@@ -170,12 +170,6 @@ def controlCommand(instance, phrase):
             friendlyNo = 6
         elif ("friendly 7" in phrase or "friendly seven" in phrase):
             friendlyNo = 7
-        elif ("friendly 8" in phrase or "friendly eight" in phrase or "friendly ate" in phrase):
-            friendlyNo = 8
-        elif ("friendly 9" in phrase or "friendly nine" in phrase):
-            friendlyNo = 9
-        elif ("friendly 10" in phrase or "friendly ten" in phrase):
-            friendlyNo = 10
 
         if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
             enemyNo = 0
@@ -193,12 +187,6 @@ def controlCommand(instance, phrase):
             enemyNo = 6
         elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
             enemyNo = 7
-        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase or "anime 8" in phrase or "anime eight" in phrase or "anime ate" in phrase):
-            enemyNo = 8
-        elif ("enemy 9" in phrase or "enemy nine" in phrase or "anime 9" in phrase or "anime nine" in phrase):
-            enemyNo = 9
-        elif ("enemy 10" in phrase or "enemy ten" in phrase or "anime 10" in phrase or "anime ten" in phrase):
-            enemyNo = 10
 
         if (friendlyNo != -1 and enemyNo != -1):
             VoiceCommands.attack(instance, friendlyNo, enemyNo)
@@ -234,16 +222,7 @@ def controlCommand(instance, phrase):
             friendly = True
         elif ("friendly 7" in phrase or "friendly seven" in phrase):
             targetNo = 7
-            friendly = True
-        elif ("friendly 8" in phrase or "friendly eight" in phrase or "friendly ate" in phrase):
-            targetNo = 8
-            friendly = True
-        elif ("friendly 9" in phrase or "friendly nine" in phrase):
-            targetNo = 9
-            friendly = True
-        elif ("friendly 10" in phrase or "friendly ten" in phrase):
-            targetNo = 10
-            friendly = True            
+            friendly = True           
         
         if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
             targetNo = 0
@@ -268,15 +247,6 @@ def controlCommand(instance, phrase):
             friendly = False
         elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
             targetNo = 7
-            friendly = False
-        elif ("enemy 8" in phrase or "enemy eight" in phrase or "enemy ate" in phrase or "anime 8" in phrase or "anime eight" in phrase or "anime ate" in phrase):
-            targetNo = 8
-            friendly = False
-        elif ("enemy 9" in phrase or "enemy nine" in phrase or "anime 9" in phrase or "anime nine" in phrase):
-            targetNo = 9
-            friendly = False
-        elif ("enemy 10" in phrase or "enemy ten" in phrase or "anime 10" in phrase or "anime ten" in phrase):
-            targetNo = 10
             friendly = False
 
         if (targetNo != -1):

@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import VoiceCommands
+import SimilarWords
     
 r = sr.Recognizer()
 mic = sr.Microphone()
@@ -33,14 +34,14 @@ def controlCommand(instance, phrase):
     # General commands
     #
 
-    if (phrase == "exit voice"):
+    if (phrase in SimilarWords.exitVoice):
         VoiceCommands.quitProgram()
 
     # 
     # Gameplay commands
     #
 
-    elif (phrase == "end turn" or phrase == "and turn" or phrase == "entertain" or phrase == "nth term" or phrase == "anton" or phrase == "enstone" or phrase == "and 10" or phrase == "enter" or phrase == "end term"):
+    elif (phrase in SimilarWords.endTurn):
         VoiceCommands.endTurn()
 
     # 
@@ -48,204 +49,205 @@ def controlCommand(instance, phrase):
     #
 
     # Navigate from main menu to single player difficulty selection
-    elif (phrase == "single player"):
+    elif (phrase in SimilarWords.singlePlayer):
         VoiceCommands.singlePlayer()
 
     # Select single player difficulty
-    elif ("difficulty" in phrase):
-        if ("normal" in phrase):
+    #elif ("difficulty" in phrase):
+    elif (any(x in phrase for x in SimilarWords.difficulty)):
+        if (any(x in phrase for x in SimilarWords.normal)):
             VoiceCommands.selectDifficulty("normal")
-        elif ("expert" in phrase):
+        elif (any(x in phrase for x in SimilarWords.expert)):
             VoiceCommands.selectDifficulty("expert")
         else:
             print("difficulty not recognised")
     
     # Select deck
-    elif ("deck" in phrase or "dick" in phrase or "next" in phrase or "text" in phrase or "tech" in phrase or "ek" in phrase or "jet" in phrase):
-        if ("1" in phrase or "one" in phrase):
+    elif (any(x in phrase for x in SimilarWords.deck)):
+        if (any(x in phrase for x in SimilarWords.one)):
             VoiceCommands.selectDeck(1)
-        elif ("2" in phrase or "two" in phrase or "too" in phrase or "to" in phrase):
+        elif (any(x in phrase for x in SimilarWords.two)):
             VoiceCommands.selectDeck(2)
-        elif ("3" in phrase or "three" in phrase or "free" in phrase):
+        elif (any(x in phrase for x in SimilarWords.three)):
             VoiceCommands.selectDeck(3)
-        elif ("4" in phrase or "four" in phrase or "for" in phrase):
+        elif (any(x in phrase for x in SimilarWords.four)):
             VoiceCommands.selectDeck(4)
-        elif ("5" in phrase or "five" in phrase):
+        elif (any(x in phrase for x in SimilarWords.five)):
             VoiceCommands.selectDeck(5)
-        elif ("6" in phrase or "six" in phrase):
+        elif (any(x in phrase for x in SimilarWords.six)):
             VoiceCommands.selectDeck(6)
-        elif ("7" in phrase or "seven" in phrase):
+        elif (any(x in phrase for x in SimilarWords.seven)):
             VoiceCommands.selectDeck(7)
-        elif ("8" in phrase or "eight" in phrase or "ate" in phrase):
+        elif (any(x in phrase for x in SimilarWords.eight)):
             VoiceCommands.selectDeck(8)
-        elif ("9" in phrase or "nine" in phrase):
+        elif (any(x in phrase for x in SimilarWords.nine)):
             VoiceCommands.selectDeck(9)
-    elif ("dec1" in phrase or "daquan" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec1)):
         VoiceCommands.selectDeck(1)
-    elif ("dec2" in phrase or "bectu" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec2)):
         VoiceCommands.selectDeck(2)
-    elif ("dec3" in phrase or "dec free" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec3)):
         VoiceCommands.selectDeck(3)
-    elif ("dec4" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec4)):
         VoiceCommands.selectDeck(4)
-    elif ("dec5" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec5)):
         VoiceCommands.selectDeck(5)
-    elif ("dec6" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec6)):
         VoiceCommands.selectDeck(6)
-    elif ("dec7" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec7)):
         VoiceCommands.selectDeck(4)
-    elif ("dec8" in phrase or "decade" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec8)):
         VoiceCommands.selectDeck(5)
-    elif ("dec9" in phrase):
+    elif (any(x in phrase for x in SimilarWords.dec9)):
         VoiceCommands.selectDeck(6)
 
     # Select enemy
-    elif ("opponent" in phrase or "appointment" in phrase or "exponent" in phrase):
-        if ("1" in phrase):
+    elif (any(x in phrase for x in SimilarWords.opponent)):
+        if (any(x in phrase for x in SimilarWords.one)):
             VoiceCommands.selectOpponent(1)
-        elif ("2" in phrase or "two" in phrase or "to" in phrase):
+        elif (any(x in phrase for x in SimilarWords.two)):
             VoiceCommands.selectOpponent(2)
-        elif ("3" in phrase or "three" in phrase or "free" in phrase):
+        elif (any(x in phrase for x in SimilarWords.three)):
             VoiceCommands.selectOpponent(3)
-        elif ("4" in phrase or "four" in phrase or "for" in phrase):
+        elif (any(x in phrase for x in SimilarWords.four)):
             VoiceCommands.selectOpponent(4)
-        elif ("5" in phrase or "five" in phrase):
+        elif (any(x in phrase for x in SimilarWords.five)):
             VoiceCommands.selectOpponent(5)
-        elif ("6" in phrase or "six" in phrase):
+        elif (any(x in phrase for x in SimilarWords.six)):
             VoiceCommands.selectOpponent(6)
-        elif ("7" in phrase or "seven" in phrase):
+        elif (any(x in phrase for x in SimilarWords.seven)):
             VoiceCommands.selectOpponent(7)
-        elif ("8" in phrase or "eight" in phrase or "ate" in phrase):
+        elif (any(x in phrase for x in SimilarWords.eight)):
             VoiceCommands.selectOpponent(8)
-        elif ("9" in phrase or "nine" in phrase):
+        elif (any(x in phrase for x in SimilarWords.nine)):
             VoiceCommands.selectOpponent(9)
 
     # Start game
-    elif ("start" in phrase and "game" in phrase):
+    elif ((any(x in phrase for x in SimilarWords.start)) and (any(x in phrase for x in SimilarWords.game))):
         VoiceCommands.startGame()
 
     # Play card
     # elif ("play card" in phrase or "play cod" in phrase or "play clyde" in phrase or "play cars" in phrase or "play hard" in phrase):
     elif ("play" in phrase):
-        if ("1" in phrase or "one" in phrase):
+        if (any(x in phrase for x in SimilarWords.one)):
             VoiceCommands.playCard(instance, 1)
-        elif ("2" in phrase or "two" in phrase or "to" in phrase):
+        elif (any(x in phrase for x in SimilarWords.two)):
             VoiceCommands.playCard(instance, 2)
-        elif ("3" in phrase or "three" in phrase or "free" in phrase):
+        elif (any(x in phrase for x in SimilarWords.three)):
             VoiceCommands.playCard(instance, 3)
-        elif ("4" in phrase or "four" in phrase or "for" in phrase):
+        elif (any(x in phrase for x in SimilarWords.four)):
             VoiceCommands.playCard(instance, 4)
-        elif ("5" in phrase or "five" in phrase):
+        elif (any(x in phrase for x in SimilarWords.five)):
             VoiceCommands.playCard(instance, 5)
-        elif ("6" in phrase or "six" in phrase):
+        elif (any(x in phrase for x in SimilarWords.six)):
             VoiceCommands.playCard(instance, 6)
-        elif ("7" in phrase or "seven" in phrase):
+        elif (any(x in phrase for x in SimilarWords.seven)):
             VoiceCommands.playCard(instance, 7)
-        elif ("8" in phrase or "eight" in phrase or "ate" in phrase):
+        elif (any(x in phrase for x in SimilarWords.eight)):
             VoiceCommands.playCard(instance, 8)
-        elif ("9" in phrase or "nine" in phrase): 
+        elif (any(x in phrase for x in SimilarWords.nine)):
             VoiceCommands.playCard(instance, 9)
-        elif ("10" in phrase or "ten" in phrase):
+        elif (any(x in phrase for x in SimilarWords.ten)):
             VoiceCommands.playCard(instance, 10)
-    elif ("play cartoon" in phrase):
+    elif (any(x in phrase for x in SimilarWords.playCardTwo)):
         VoiceCommands.playCard(instance, 2)
 
     # Attack with minion or hero
-    elif ("attack" in phrase or "a tack" in phrase or "tech" in phrase):
+    elif (any(x in phrase for x in SimilarWords.attack)):
         friendlyNo = -1
         enemyNo = -1
-        if ("friendly 0" in phrase or "friendly zero" in phrase):
+        if (any(("friendly " + x) in phrase for x in SimilarWords.zero)):
             friendlyNo = 0
-        elif ("friendly 1" in phrase or "friendly one" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.one)):
             friendlyNo = 1
-        elif ("friendly 2" in phrase or "friendly two" in phrase or "friendly to" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.two)):
             friendlyNo = 2
-        elif ("friendly 3" in phrase or "friendly three" in phrase or "friendly free" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.three)):
             friendlyNo = 3
-        elif ("friendly 4" in phrase or "friendly four" in phrase or "friendly for" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.four)):
             friendlyNo = 4
-        elif ("friendly 5" in phrase or "friendly five" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.five)):
             friendlyNo = 5
-        elif ("friendly 6" in phrase or "friendly six" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.six)):
             friendlyNo = 6
-        elif ("friendly 7" in phrase or "friendly seven" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.seven)):
             friendlyNo = 7
 
-        if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
+        if (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.zero)):
             enemyNo = 0
-        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase or "anime 1" in phrase or "anime one" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.one)):
             enemyNo = 1
-        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase or "anime 2" in phrase or "anime two" in phrase or "anime to" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.two)):
             enemyNo = 2
-        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase or "anime 3" in phrase or "anime three" in phrase or "anime free" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.three)):
             enemyNo = 3
-        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase or "anime 4" in phrase or "anime four" in phrase or "anime for" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.four)):
             enemyNo = 4
-        elif ("enemy 5" in phrase or "enemy five" in phrase or "anime 5" in phrase or "anime five" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.five)):
             enemyNo = 5
-        elif ("enemy 6" in phrase or "enemy six" in phrase or "anime 6" in phrase or "anime six" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.six)):
             enemyNo = 6
-        elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.seven)):
             enemyNo = 7
 
         if (friendlyNo != -1 and enemyNo != -1):
             VoiceCommands.attack(instance, friendlyNo, enemyNo)
 
     # Attack the enemy hero with all minions
-    elif ("all face" in phrase or "altace" in phrase or "old face" in phrase):
+    elif (any(x in phrase for x in SimilarWords.allFace)):
         VoiceCommands.face(instance)
 
     # Target a card
-    elif ("target" in phrase):
+    elif (any(x in phrase for x in SimilarWords.target)):
         targetNo = -1
         friendly = True
-        if ("friendly 0" in phrase or "friendly zero" in phrase):
+        if (any(x in phrase for x in SimilarWords.friendlyZero)):
             targetNo = 0
             friendly = True
-        elif ("friendly 1" in phrase or "friendly one" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.one)):
             targetNo = 1
             friendly = True
-        elif ("friendly 2" in phrase or "friendly two" in phrase or "friendly to" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.two)):
             targetNo = 2
             friendly = True
-        elif ("friendly 3" in phrase or "friendly three" in phrase or "friendly free" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.three)):
             targetNo = 3
             friendly = True
-        elif ("friendly 4" in phrase or "friendly four" in phrase or "friendly for" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.four)):
             targetNo = 4
             friendly = True
-        elif ("friendly 5" in phrase or "friendly five" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.five)):
             targetNo = 5
             friendly = True
-        elif ("friendly 6" in phrase or "friendly six" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.six)):
             targetNo = 6
             friendly = True
-        elif ("friendly 7" in phrase or "friendly seven" in phrase):
+        elif (any(("friendly " + x) in phrase for x in SimilarWords.seven)):
             targetNo = 7
             friendly = True           
         
-        if ("enemy 0" in phrase or "enemy zero" in phrase or "anime 0" in phrase or "anime zero" in phrase):
+        if (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.zero)):
             targetNo = 0
             friendly = False
-        elif ("enemy 1" in phrase or "enemy one" in phrase or "anyone" in phrase or "anime 1" in phrase or "anime one" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.one)):
             targetNo = 1
             friendly = False
-        elif ("enemy 2" in phrase or "enemy two" in phrase or "enemy to" in phrase or "anime 2" in phrase or "anime two" in phrase or "anime to" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.two)):
             targetNo = 2
             friendly = False
-        elif ("enemy 3" in phrase or "enemy three" in phrase or "enemy free" in phrase or "anime 3" in phrase or "anime three" in phrase or "anime free" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.three)):
             targetNo = 3
             friendly = False
-        elif ("enemy 4" in phrase or "enemy four" in phrase or "enemy for" in phrase or "anime 4" in phrase or "anime four" in phrase or "anime for" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.four)):
             targetNo = 4
             friendly = False
-        elif ("enemy 5" in phrase or "enemy five" in phrase or "anime 5" in phrase or "anime five" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.five)):
             targetNo = 5
             friendly = False
-        elif ("enemy 6" in phrase or "enemy six" in phrase or "anime 6" in phrase or "anime six" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.six)):
             targetNo = 6
             friendly = False
-        elif ("enemy 7" in phrase or "enemy seven" in phrase or "anime 7" in phrase or "anime seven" in phrase):
+        elif (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.seven)):
             targetNo = 7
             friendly = False
 
@@ -253,42 +255,42 @@ def controlCommand(instance, phrase):
             VoiceCommands.target(instance, targetNo, friendly)
 
     # Make mulligan choices
-    elif ("mulligan" in phrase or "Milligan" in phrase):
-        if ("confirm" in phrase):
+    elif (any(x in phrase for x in SimilarWords.mulligan)):
+        if (any(x in phrase for x in SimilarWords.confirm)):
             VoiceCommands.mulliganConfirm()
         else:
             cards = []
-            if ("1" in phrase or "one" in phrase):
+            if (any(x in phrase for x in SimilarWords.one)):
                 cards.append(1)
-            if ("2" in phrase or "two" in phrase or "to" in phrase):
+            if (any(x in phrase for x in SimilarWords.two)):
                 cards.append(2)
-            if ("3" in phrase or "three" in phrase or "free" in phrase):
+            if (any(x in phrase for x in SimilarWords.three)):
                 cards.append(3)
-            if ("4" in phrase or "four" in phrase or "for" in phrase):
+            if (any(x in phrase for x in SimilarWords.four)):
                 cards.append(4)
             VoiceCommands.mulligan(instance, cards)
 
     # Hero power
-    elif ("hero power" in phrase):
+    elif (any(x in phrase for x in SimilarWords.heroPower)):
         VoiceCommands.heroPower()
 
 
     # Choose from discover
-    elif ("choose" in phrase or "cheese" in phrase):
-        if ("hide" in phrase or "show" in phrase):
+    elif (any(x in phrase for x in SimilarWords.choose)):
+        if (any(x in phrase for x in SimilarWords.hide) or (any(x in phrase for x in SimilarWords.show))):
             VoiceCommands.discover(-1)
         else:
-            if ("1" in phrase or "one" in phrase):
+            if (any(x in phrase for x in SimilarWords.one)):
                     VoiceCommands.discover(1)
-            if ("2" in phrase or "two" in phrase or "to" in phrase):
+            if (any(x in phrase for x in SimilarWords.two)):
                 VoiceCommands.discover(2)
-            if ("3" in phrase or "three" in phrase or "free" in phrase):
+            if (any(x in phrase for x in SimilarWords.three)):
                 VoiceCommands.discover(3)
-    elif ("shrewsbury" in phrase):
+    elif (any(x in phrase for x in SimilarWords.chooseThree)):
         VoiceCommands.discover(3)
 
     # Cancel targeted card
-    elif ("cancel" in phrase):
+    elif (any(x in phrase for x in SimilarWords.cancel)):
         VoiceCommands.cancel()
 
 
@@ -296,76 +298,74 @@ def feedbackCommand(instance, phrase):
     print()
 
     #Speaking hand cards
-    if ("hand" in phrase or "and" in phrase):
-        if ("all" in phrase):
+    if (any(x in phrase for x in SimilarWords.hand)):
+        if (any(x in phrase for x in SimilarWords.allSet)):
             VoiceCommands.speakAllHandCards(instance)
-        elif ((len(instance.handCards) > 0) and (("one" in phrase) or ("1" in phrase))):
+        elif ((len(instance.handCards) > 0) and (any(x in phrase for x in SimilarWords.one))):
             line = instance.handCards[0]
             VoiceCommands.speakString(instance, line)
-        elif ((len(instance.handCards) > 1) and (("two" in phrase) or ("2" in phrase) or ("too" in phrase) or ("to" in phrase))):
+        elif ((len(instance.handCards) > 1) and (any(x in phrase for x in SimilarWords.two))):
             line = instance.handCards[1]
             VoiceCommands.speakString(instance, line)
-        elif ((len(instance.handCards) > 2) and (("three" in phrase) or ("3" in phrase) or ("free" in phrase))):
+        elif ((len(instance.handCards) > 2) and (any(x in phrase for x in SimilarWords.three))):
             line = instance.handCards[2]
             VoiceCommands.speakString(instance, line)
-        elif ((len(instance.handCards) > 3) and (("four" in phrase) or ("4" in phrase) or ("for" in phrase))):
+        elif ((len(instance.handCards) > 3) and (any(x in phrase for x in SimilarWords.four))):
             line = instance.handCards[3]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 4) and (("five" in phrase) or ("5" in phrase))):
+        elif ((len(instance.handCards) > 4) and (any(x in phrase for x in SimilarWords.five))):
             line = instance.handCards[4]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 5) and (("six" in phrase) or ("6" in phrase))):
+        elif ((len(instance.handCards) > 5) and (any(x in phrase for x in SimilarWords.six))):
             line = instance.handCards[5]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 6) and (("seven" in phrase) or ("7" in phrase))):
+        elif ((len(instance.handCards) > 6) and (any(x in phrase for x in SimilarWords.seven))):
             line = instance.handCards[6]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 7) and (("eight" in phrase) or ("8" in phrase) or ("ate" in phrase))):
+        elif ((len(instance.handCards) > 7) and (any(x in phrase for x in SimilarWords.eight))):
             line = instance.handCards[7]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 8) and (("nine" in phrase) or ("9" in phrase))):
+        elif ((len(instance.handCards) > 8) and (any(x in phrase for x in SimilarWords.nine))):
             line = instance.handCards[8]
             VoiceCommands.speakString(instance, line) 
-        elif ((len(instance.handCards) > 9) and (("ten" in phrase) or ("10" in phrase))):
+        elif ((len(instance.handCards) > 9) and (any(x in phrase for x in SimilarWords.ten))):
             line = instance.handCards[9]
             VoiceCommands.speakString(instance, line) 
-    elif ("handle" in phrase):
+    elif (any(x in phrase for x in SimilarWords.handAll)):
         VoiceCommands.speakAllHandCards(instance)
 
 
     #Speaking board minions
-    elif ("board" in phrase or "bored" in phrase or "old" in phrase):
-        if ("all" in phrase or "lol" in phrase):
-    # elif ("potato" in phrase):
+    elif (any(x in phrase for x in SimilarWords.board)):
+        if (any(x in phrase for x in SimilarWords.allSet)):
             VoiceCommands.speakAllBoardMinions(instance)
-            
-        elif ((len(instance.friendlyMinions) > 0) and (("friendly one" in phrase) or ("friendly 1" in phrase))):
+        elif ((len(instance.friendlyMinions) > 0) and (any(("friendly " + x) in phrase for x in SimilarWords.one))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 1)
-        elif ((len(instance.friendlyMinions) > 1) and (("friendly two" in phrase) or ("friendly 2" in phrase) or ("friendly too" in phrase) or ("friendly to" in phrase))):
+        elif ((len(instance.friendlyMinions) > 1) and (any(("friendly " + x) in phrase for x in SimilarWords.two))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 2)
-        elif ((len(instance.friendlyMinions) > 2) and (("friendly three" in phrase) or ("friendly 3" in phrase) or ("friendly free" in phrase))):
+        elif ((len(instance.friendlyMinions) > 2) and (any(("friendly " + x) in phrase for x in SimilarWords.three))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 3)
-        elif ((len(instance.friendlyMinions) > 3) and (("friendly four" in phrase) or ("friendly 4" in phrase) or ("friendly for" in phrase))):
+        elif ((len(instance.friendlyMinions) > 3) and (any(("friendly " + x) in phrase for x in SimilarWords.four))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 4)
-        elif ((len(instance.friendlyMinions) > 4) and (("friendly five" in phrase) or ("friendly 5" in phrase))):
+        elif ((len(instance.friendlyMinions) > 4) and (any(("friendly " + x) in phrase for x in SimilarWords.five))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 5)
-        elif ((len(instance.friendlyMinions) > 5) and (("friendly six" in phrase) or ("friendly 6" in phrase))):
+        elif ((len(instance.friendlyMinions) > 5) and (any(("friendly " + x) in phrase for x in SimilarWords.six))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 6)
-        elif ((len(instance.friendlyMinions) > 6) and (("friendly seven" in phrase) or ("friendly 7" in phrase))):
+        elif ((len(instance.friendlyMinions) > 6) and (any(("friendly " + x) in phrase for x in SimilarWords.seven))):
             VoiceCommands.speakFriendlyBoardMinion(instance, 7)
 
-        elif ((len(instance.enemyMinions) > 0) and (("enemy one" in phrase) or ("enemy 1" in phrase) or ("anime one" in phrase) or ("anime 1" in phrase))):
+        elif ((len(instance.enemyMinions) > 0) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.one))):
             VoiceCommands.speakEnemyBoardMinion(instance, 1)
-        elif ((len(instance.enemyMinions) > 1) and (("enemy two" in phrase) or ("enemy 2" in phrase) or ("enemy too" in phrase) or ("enemy to" in phrase) or ("anime two" in phrase) or ("anime 2" in phrase) or ("anime too" in phrase) or ("anime to" in phrase))):
+        elif ((len(instance.enemyMinions) > 1) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.two))):
             VoiceCommands.speakEnemyBoardMinion(instance, 2)
-        elif ((len(instance.enemyMinions) > 2) and (("enemy three" in phrase) or ("enemy 3" in phrase) or ("enemy free" in phrase) or ("anime three" in phrase) or ("anime 3" in phrase) or ("anime free" in phrase))):
+        elif ((len(instance.enemyMinions) > 2) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.three))):
             VoiceCommands.speakEnemyBoardMinion(instance, 3)
-        elif ((len(instance.enemyMinions) > 3) and (("enemy four" in phrase) or ("enemy 4" in phrase) or ("enemy for" in phrase) or ("anime four" in phrase) or ("anime 4" in phrase) or ("anime for" in phrase))):
+        elif ((len(instance.enemyMinions) > 3) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.four))):
             VoiceCommands.speakEnemyBoardMinion(instance, 4)
-        elif ((len(instance.enemyMinions) > 4) and (("enemy five" in phrase) or ("enemy 5" in phrase) or ("anime five" in phrase) or ("anime 5" in phrase))):
+        elif ((len(instance.enemyMinions) > 4) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.five))):
             VoiceCommands.speakEnemyBoardMinion(instance, 5)
-        elif ((len(instance.enemyMinions) > 5) and (("enemy six" in phrase) or ("enemy 6" in phrase) or ("anime six" in phrase) or ("anime 6" in phrase))):
+        elif ((len(instance.enemyMinions) > 5) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.six))):
             VoiceCommands.speakEnemyBoardMinion(instance, 6)
-        elif ((len(instance.enemyMinions) > 6) and (("enemy seven" in phrase) or ("enemy 7" in phrase) or ("anime seven" in phrase) or ("anime 7" in phrase))):
+        elif ((len(instance.enemyMinions) > 6) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.seven))):
             VoiceCommands.speakEnemyBoardMinion(instance, 7)
     print()

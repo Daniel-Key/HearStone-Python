@@ -25,6 +25,8 @@ import keyboard
 # mouseControl.clickFraction(0.1, 0.1)
 # voiceCommands.endTurn()
 
+# Enter virtual environment: .\env\Scripts\activate
+
 instance = Instance.Instance()
 
 def loop():
@@ -43,8 +45,8 @@ def loop():
                 break
             else:
                 pass
-        except:
-            print("ERROR- program exiting")
+        except Exception as e:
+            print(e)
             break
     
     print("Program exiting")

@@ -331,34 +331,34 @@ def feedbackCommand(instance, phrase):
             VoiceCommands.speakAllHandCards(instance)
         elif ((len(instance.handCards) > 0) and (("one" in phrase) or ("1" in phrase))):
             line = instance.handCards[0]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 1) and (("two" in phrase) or ("2" in phrase) or ("too" in phrase) or ("to" in phrase))):
             line = instance.handCards[1]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 2) and (("three" in phrase) or ("3" in phrase) or ("free" in phrase))):
             line = instance.handCards[2]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 3) and (("four" in phrase) or ("4" in phrase) or ("for" in phrase))):
             line = instance.handCards[3]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 4) and (("five" in phrase) or ("5" in phrase))):
             line = instance.handCards[4]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 5) and (("six" in phrase) or ("6" in phrase))):
             line = instance.handCards[5]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 6) and (("seven" in phrase) or ("7" in phrase))):
             line = instance.handCards[6]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 7) and (("eight" in phrase) or ("8" in phrase) or ("ate" in phrase))):
             line = instance.handCards[7]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 8) and (("nine" in phrase) or ("9" in phrase))):
             line = instance.handCards[8]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 9) and (("ten" in phrase) or ("10" in phrase))):
             line = instance.handCards[9]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
     elif ("handle" in phrase):
         VoiceCommands.speakAllHandCards(instance)
 

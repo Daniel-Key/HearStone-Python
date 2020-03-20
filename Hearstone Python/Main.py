@@ -5,6 +5,7 @@ import VoiceRecognition
 import MouseControl
 import VoiceCommands
 import Instance
+import AudioOut
 import keyboard
 
 # hslog stuff
@@ -28,17 +29,24 @@ import keyboard
 # Enter virtual environment: .\env\Scripts\activate
 
 instance = Instance.Instance()
+inputReady = False
 
-def loop():
-    while (VoiceCommands.programRunning): 
+def loop(): 
+    global inputReady
+    while (instance.programRunning): 
         MyLogParser.checkForLogFileUpdates(instance)
+        if not inputReady:
+            AudioOut.bingThreaded()
+            inputReady = True
 
-        try:  
+        try:
             if keyboard.is_pressed(' '): 
                 print("check")
                 VoiceRecognition.takeInput(instance, True)
+                inputReady = False
             elif keyboard.is_pressed('\\'): 
                 print("check")
+                inputReady = False
                 VoiceRecognition.takeInput(instance, False)
             elif keyboard.is_pressed('q'):
                 print("quit")

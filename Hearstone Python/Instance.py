@@ -1,4 +1,5 @@
 class Instance:
+    programRunning = True
     #
     # MyLogParser
     #

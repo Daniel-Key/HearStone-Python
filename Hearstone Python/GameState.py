@@ -24,11 +24,13 @@ def calculateHandCards(instance):
                 cardInfo = API.requestCardInfo(cardID)
                 instance.cardApiInfo[cardID] = cardInfo
 
-            #Checks that the zonePos isn't duplicate (occurs when drawing cards on turn), if it is adds the card to the end
-            if ((zonePos-1 in instance.handCards) and (zonePos != 0)) :
-                instance.handCards[len(instance.handCards)] = cardInfo
-            else:
-                instance.handCards[zonePos - 1] = cardInfo
+            #Checks that the cardID isn't in the friendly board minions (occurs when a chard minion is played, tag doesn't properly update)
+            if cardID not in instance.friendlyMinions:
+                #Checks that the zonePos isn't duplicate (occurs when drawing cards on turn), if it is adds the card to the end
+                if ((zonePos-1 in instance.handCards) and (zonePos != 0)) :
+                    instance.handCards[len(instance.handCards)] = cardInfo
+                else:
+                    instance.handCards[zonePos - 1] = cardInfo
 
     #Sorting dictionary in order
     tempHandCards = {}

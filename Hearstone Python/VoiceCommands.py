@@ -6,14 +6,12 @@ from gtts import gTTS
 import os
 import playsound
 
-programRunning = True
-
 #
 # General commands
 #
 
-def quitProgram():
-    VoiceCommands.programRunning = False
+def quitProgram(instance):
+    instance.programRunning = False
 
 # 
 # Game commands

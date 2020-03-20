@@ -1,8 +1,8 @@
 import GameState
 import API
 
-# path = "D:/Hearthstone/Logs/Power.log"
-path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
+path = "D:/Hearthstone/Logs/Power.log"
+# path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
 
 # Process log file line
 def processLogFileLine(instance, line) :
@@ -17,8 +17,8 @@ def processLogFileLine(instance, line) :
         instance.optionList.append(line)
     if ("BLOCK_START" in line or "Block Start=(null)" in line) :
         if (len(instance.optionList) != 0):
-            GameState.calculateHandCards(instance)
             GameState.calculateBoardMinions(instance)
+            GameState.calculateHandCards(instance)
             instance.optionList.clear()
     # if ("-   Entities" in line):
     #     if (instance.preMulligan == True or len(instance.preMulliganList) == 0):
@@ -45,11 +45,12 @@ def processLogFileLine(instance, line) :
         #     card = i[i.index("cardId"):]
         #     print(card[card.index("name") + 7 : card.index("cardSet") - 3])
         # print()
+    # if ("TAG_CHANGE" in line and )
 
 # Will be in main loop looking for game state changes
 def checkForLogFileUpdates(instance):
     thisLength = 0
-    for line in open(path):
+    for line in open(path, 'a+'):
         thisLength = thisLength + 1
         # If line has not yet been processed
         if (thisLength > instance.logLength):

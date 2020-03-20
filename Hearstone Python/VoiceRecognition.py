@@ -1,9 +1,12 @@
 import speech_recognition as sr
 import VoiceCommands
 import SimilarWords
+import threading
     
 r = sr.Recognizer()
 mic = sr.Microphone()
+
+recognisedText = ""
 
 def recognise() :
     # To Do: ambient noise stuff
@@ -17,8 +20,14 @@ def recognise() :
         text = "error"
     return text
 
+# def takeInputThreaded(instance, control):
+#     takeInputThread = threading.Thread(target=takeInput, args=(instance, control), daemon=True)
+#     takeInputThread.start()
+#     return takeInputThread
+
 def takeInput(instance, control):
     phrase = recognise()
+    
     print("Recognised: " + phrase)
 
     phrase = phrase.lower()
@@ -35,7 +44,7 @@ def controlCommand(instance, phrase):
     #
 
     if (phrase in SimilarWords.exitVoice):
-        VoiceCommands.quitProgram()
+        VoiceCommands.quitProgram(instance)
 
     # 
     # Gameplay commands
@@ -103,23 +112,24 @@ def controlCommand(instance, phrase):
 
     # Select enemy
     elif (any(x in phrase for x in SimilarWords.opponent)):
-        if (any(x in phrase for x in SimilarWords.one)):
+        modifiedPhrase = phrase.replace('opponent', '')
+        if (any(x in modifiedPhrase for x in SimilarWords.one)):
             VoiceCommands.selectOpponent(1)
-        elif (any(x in phrase for x in SimilarWords.two)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.two)):
             VoiceCommands.selectOpponent(2)
-        elif (any(x in phrase for x in SimilarWords.three)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.three)):
             VoiceCommands.selectOpponent(3)
-        elif (any(x in phrase for x in SimilarWords.four)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.four)):
             VoiceCommands.selectOpponent(4)
-        elif (any(x in phrase for x in SimilarWords.five)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.five)):
             VoiceCommands.selectOpponent(5)
-        elif (any(x in phrase for x in SimilarWords.six)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.six)):
             VoiceCommands.selectOpponent(6)
-        elif (any(x in phrase for x in SimilarWords.seven)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.seven)):
             VoiceCommands.selectOpponent(7)
-        elif (any(x in phrase for x in SimilarWords.eight)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.eight)):
             VoiceCommands.selectOpponent(8)
-        elif (any(x in phrase for x in SimilarWords.nine)):
+        elif (any(x in modifiedPhrase for x in SimilarWords.nine)):
             VoiceCommands.selectOpponent(9)
 
     # Start game
@@ -303,34 +313,34 @@ def feedbackCommand(instance, phrase):
             VoiceCommands.speakAllHandCards(instance)
         elif ((len(instance.handCards) > 0) and (any(x in phrase for x in SimilarWords.one))):
             line = instance.handCards[0]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 1) and (any(x in phrase for x in SimilarWords.two))):
             line = instance.handCards[1]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 2) and (any(x in phrase for x in SimilarWords.three))):
             line = instance.handCards[2]
-            VoiceCommands.speakString(instance, line)
+            VoiceCommands.speakCardName(instance, line)
         elif ((len(instance.handCards) > 3) and (any(x in phrase for x in SimilarWords.four))):
             line = instance.handCards[3]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 4) and (any(x in phrase for x in SimilarWords.five))):
             line = instance.handCards[4]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 5) and (any(x in phrase for x in SimilarWords.six))):
             line = instance.handCards[5]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 6) and (any(x in phrase for x in SimilarWords.seven))):
             line = instance.handCards[6]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 7) and (any(x in phrase for x in SimilarWords.eight))):
             line = instance.handCards[7]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 8) and (any(x in phrase for x in SimilarWords.nine))):
             line = instance.handCards[8]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
         elif ((len(instance.handCards) > 9) and (any(x in phrase for x in SimilarWords.ten))):
             line = instance.handCards[9]
-            VoiceCommands.speakString(instance, line) 
+            VoiceCommands.speakCardName(instance, line) 
     elif (any(x in phrase for x in SimilarWords.handAll)):
         VoiceCommands.speakAllHandCards(instance)
 

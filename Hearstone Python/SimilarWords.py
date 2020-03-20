@@ -20,7 +20,7 @@ hide = {"hide"}
 show = {"show"}
 cancel = {"cancel"}
 hand = {"hand", "and"}
-allSet = {"all", "lol"}
+allSet = {"all", "lol", "tool"}
 board = {"board", "bored", "old"}
 
 zero = {"zero", "0"}

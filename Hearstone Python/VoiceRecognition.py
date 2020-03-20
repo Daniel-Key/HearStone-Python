@@ -71,6 +71,14 @@ def controlCommand(instance, phrase):
         else:
             print("difficulty not recognised")
     
+    
+    # Select from previous or next decks
+    elif (any(x in phrase for x in SimilarWords.decks)):
+        if (any(x in phrase for x in SimilarWords.previous)):
+            VoiceCommands.prevDecks()
+        if (any(x in phrase for x in SimilarWords.nextTheWord)):
+            VoiceCommands.nextDecks()
+
     # Select deck
     elif (any(x in phrase for x in SimilarWords.deck)):
         if (any(x in phrase for x in SimilarWords.one)):
@@ -144,6 +152,8 @@ def controlCommand(instance, phrase):
         elif (any(x in phrase for x in SimilarWords.two)):
             VoiceCommands.playCard(instance, 2)
         elif (any(x in phrase for x in SimilarWords.three)):
+            print(instance.handCards)
+            print("PLAY THREE")
             VoiceCommands.playCard(instance, 3)
         elif (any(x in phrase for x in SimilarWords.four)):
             VoiceCommands.playCard(instance, 4)
@@ -211,7 +221,7 @@ def controlCommand(instance, phrase):
     elif (any(x in phrase for x in SimilarWords.target)):
         targetNo = -1
         friendly = True
-        if (any(x in phrase for x in SimilarWords.friendlyZero)):
+        if (any(("friendly " + x) in phrase for x in SimilarWords.zero)):
             targetNo = 0
             friendly = True
         elif (any(("friendly " + x) in phrase for x in SimilarWords.one)):
@@ -285,19 +295,28 @@ def controlCommand(instance, phrase):
         VoiceCommands.heroPower()
 
 
-    # Choose from discover
+    # Choose from discover or choose one
     elif (any(x in phrase for x in SimilarWords.choose)):
-        if (any(x in phrase for x in SimilarWords.hide) or (any(x in phrase for x in SimilarWords.show))):
-            VoiceCommands.discover(-1)
+        if (("<b>Choose One -</b>") in instance.lastCardPlayed):
+            # Choose from 'choose one' 
+            if (any(x in phrase for x in SimilarWords.choose)):
+                if (any(x in phrase for x in SimilarWords.one)):
+                        VoiceCommands.chooseOne(1)
+                if (any(x in phrase for x in SimilarWords.two)):
+                    VoiceCommands.chooseOne(2)
         else:
-            if (any(x in phrase for x in SimilarWords.one)):
-                    VoiceCommands.discover(1)
-            if (any(x in phrase for x in SimilarWords.two)):
-                VoiceCommands.discover(2)
-            if (any(x in phrase for x in SimilarWords.three)):
-                VoiceCommands.discover(3)
+            if (any(x in phrase for x in SimilarWords.hide) or (any(x in phrase for x in SimilarWords.show))):
+                VoiceCommands.discover(-1)
+            else:
+                if (any(x in phrase for x in SimilarWords.one)):
+                        VoiceCommands.discover(1)
+                if (any(x in phrase for x in SimilarWords.two)):
+                    VoiceCommands.discover(2)
+                if (any(x in phrase for x in SimilarWords.three)):
+                    VoiceCommands.discover(3)
     elif (any(x in phrase for x in SimilarWords.chooseThree)):
         VoiceCommands.discover(3)
+
 
     # Cancel targeted card
     elif (any(x in phrase for x in SimilarWords.cancel)):

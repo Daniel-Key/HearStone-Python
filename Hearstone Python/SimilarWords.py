@@ -1,11 +1,12 @@
 # Manual similar sounding words
 exitVoice = {"exit voice"}
-endTurn = {"end turn", "and turn", "entertain", "nth term", "anton", "enstone", "and 10", "enter", "end term"}
+endTurn = {"end turn", "and turn", "entertain", "nth term", "anton", "enstone", "and 10", "enter", "end term", "denton"}
 singlePlayer = {"single player"}
 difficulty = {"difficulty"}
 normal = {"normal"}
 expert = {"expert"}
 deck = {"deck", "dick", "next", "text", "tech", "ek", "jet"}
+decks = {"decks", "dicks", "text", "techs", "eks", "jets", "dex", "TX", "desks"}
 opponent = {"opponent", "appointment", "exponent"}
 start = {"start"}
 game = {"game", "again"}
@@ -22,6 +23,8 @@ cancel = {"cancel"}
 hand = {"hand", "and"}
 allSet = {"all", "lol", "tool"}
 board = {"board", "bored", "old"}
+previous = {"previous"}
+nextTheWord = {"next"}
 
 zero = {"zero", "0"}
 one = {"one", "1"}

@@ -29,6 +29,10 @@ import keyboard
 # Enter virtual environment: .\env\Scripts\activate
 
 instance = Instance.Instance()
+try:
+    open(MyLogParser.path)
+except:
+    open(MyLogParser.path, "x")
 inputReady = False
 
 def loop(): 

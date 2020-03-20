@@ -37,6 +37,14 @@ def selectDifficulty(difficulty):
     MouseControl.moveClickFraction(0.75, 0.85)
     time.sleep(1)
 
+# Select from first screen of decks
+def prevDecks():
+    MouseControl.moveClickFraction(0.15, 0.48)
+
+# Select from second screen of decks
+def nextDecks():
+    MouseControl.moveClickFraction(0.59, 0.48)
+
 # Select deck
 def selectDeck(number):
     if (number == 1):
@@ -218,6 +226,15 @@ def playCard(instance, number):
             playCardMouseFraction(0.58, 0.93)
         if (number == 10):
             playCardMouseFraction(0.62, 0.93)
+
+
+def playCardToPositionMouseFraction(x1, y1, x2, y2):
+    MouseControl.moveMouseDownFraction(x1, y1)
+    MouseControl.moveMouseUpFraction(x2, y2)
+
+
+def playCardToPosition(instance, cardNumber, positionNumber):
+    largechunkoftext = 1
 
 
 def makeAttackMouseFraction(x1, y1, x2, y2):
@@ -479,9 +496,9 @@ def attack(instance, friendlyNumber, enemyNumber):
 #TO DO: Make this smart and only attack with available minions?
 #FACE!
 def face(instance):
+    attack(instance, 0, 0)
     for i in range(len(instance.friendlyMinions)):
         attack(instance, i+1, 0)
-        # time.sleep(0.25)
 
 #Target card
 def target(instance, targetNo, friendly):
@@ -784,6 +801,12 @@ def discover(number):
     elif (number == 3):
         MouseControl.moveClickFraction(0.71, 0.49)
 
+#Choose card (from Druid choose one), only works for two currently
+def chooseOne(number):
+    if (number == 1):
+        MouseControl.moveClickFraction(0.37, 0.49)
+    elif (number == 2):
+        MouseControl.moveClickFraction(0.62, 0.49)
 
 #Cancel targeted card
 def cancel():

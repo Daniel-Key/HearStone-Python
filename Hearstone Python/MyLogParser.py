@@ -50,7 +50,7 @@ def processLogFileLine(instance, line) :
 # Will be in main loop looking for game state changes
 def checkForLogFileUpdates(instance):
     thisLength = 0
-    for line in open(path, 'a+'):
+    for line in open(path):
         thisLength = thisLength + 1
         # If line has not yet been processed
         if (thisLength > instance.logLength):

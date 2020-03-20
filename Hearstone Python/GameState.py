@@ -2,14 +2,13 @@ import MyLogParser
 import API
 
 def calculateHandCards(instance):
+    instance.prevHandCards = instance.handCards.copy()
     instance.handCards.clear()
 
     for line in instance.optionList:
         if ((("zone=HAND" in line) or ("zone=DECK" in line)) and not (("error=REQ_NOT_MINION_JUST_PLAYED" in line) or ("error=REQ_YOUR_TURN" in line))):
             zonePos = int(line[line.index("zonePos=") + 8 : line.index("cardId=") - 1])
             cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
-            # if (zonePos == 0):
-            #     print(line)
             
             #If the line doesn't contain the card ID, search the log for it
             if (cardID == ""):
@@ -26,9 +25,17 @@ def calculateHandCards(instance):
 
             #Checks that the cardID isn't in the friendly board minions (occurs when a chard minion is played, tag doesn't properly update)
             if cardID not in instance.friendlyMinions:
-                #Checks that the zonePos isn't duplicate (occurs when drawing cards on turn), if it is adds the card to the end
+                #Checks that the zonePos isn't duplicate (occurs when drawing cards on turn), if it is adds the new card to the end
                 if ((zonePos-1 in instance.handCards) and (zonePos != 0)) :
-                    instance.handCards[len(instance.handCards)] = cardInfo
+                    inPrev = False
+                    for prevCard in instance.prevHandCards:
+                        if (cardInfo == instance.prevHandCards[prevCard]):
+                            inPrev = True
+                    if (inPrev):
+                        instance.handCards[len(instance.handCards)] = instance.handCards[zonePos-1]
+                        instance.handCards[zonePos-1] = cardInfo
+                    else:
+                        instance.handCards[len(instance.handCards)] = cardInfo
                 else:
                     instance.handCards[zonePos - 1] = cardInfo
 
@@ -39,11 +46,11 @@ def calculateHandCards(instance):
         tempHandCards[i] = instance.handCards[i]
     instance.handCards = tempHandCards
     
-    # for i in instance.handCards:
-    #     cardInfo = instance.handCards[i]
-    #     card = cardInfo[cardInfo.index("cardId"):]
-    #     print(card[card.index("name") + 7 : card.index("cardSet") - 3])
-    # print()
+    for i in instance.handCards:
+        cardInfo = instance.handCards[i]
+        card = cardInfo[cardInfo.index("cardId"):]
+        print(card[card.index("name") + 7 : card.index("cardSet") - 3])
+    print()
 
 
 def calculateBoardMinions(instance):
@@ -67,10 +74,10 @@ def calculateBoardMinions(instance):
             if (logID == instance.lastCardPlayedID):
                 cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
                 instance.friendlyMinions.append(cardID)
-
-    print(instance.friendlyMinions)
-    print(instance.enemyMinions)
-    print()
+   
+    # print(instance.enemyMinions)
+    # print(instance.friendlyMinions)
+    # print()
 
 def getHandSize(instance):
     return len(instance.handCards)

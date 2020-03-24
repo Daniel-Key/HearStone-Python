@@ -46,10 +46,12 @@ def loop():
         try:
             if keyboard.is_pressed(' '): 
                 print("check")
+                AudioOut.baBingThreaded()
                 VoiceRecognition.takeInput(instance, True)
                 inputReady = False
             elif keyboard.is_pressed('\b'): 
                 print("check")
+                AudioOut.baBingThreaded()
                 inputReady = False
                 VoiceRecognition.takeInput(instance, False)
             elif keyboard.is_pressed('q'):

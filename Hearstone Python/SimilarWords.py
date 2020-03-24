@@ -29,13 +29,18 @@ play = {"play"}
 position = {"position"}
 
 stats = {"stats"}
+health = {"health"}
+durability = {"durability"}
+cost = {"cost"}
+text = {"text"}
+attributes = {"attributes"}
 
 zero = {"zero", "0"}
 one = {"one", "1"}
 two = {"two", "2", "too", "to"}
 three = {"three", "3", "free"}
 four = {"four", "4", "for"}
-five = {"five", "5"}
+five = {"five", "5", "v"}
 six = {"six", "6"}
 seven = {"seven", "7"}
 eight = {"eight", "8", "ate"}

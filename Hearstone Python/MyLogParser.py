@@ -45,7 +45,8 @@ def processLogFileLine(instance, line) :
         #     card = i[i.index("cardId"):]
         #     print(card[card.index("name") + 7 : card.index("cardSet") - 3])
         # print()
-    # if ("TAG_CHANGE" in line and )
+    if "TAG_CHANGE" in line and "tag=DAMAGE" in line:
+        dostuff
 
 # Will be in main loop looking for game state changes
 def checkForLogFileUpdates(instance):
@@ -59,11 +60,13 @@ def checkForLogFileUpdates(instance):
 
 def lookupCardID(logID):
     for line in open(path):
-        if ((logID in line) and ("SHOW_ENTITY " in line)):
+        logIDStr = "id=" + logID
+        if ((logIDStr in line) and ("SHOW_ENTITY " in line)):
             cardID = line[line.index("CardID") + 7 : -1]
             return cardID
 
 def lookupZonePos(logID):
     for line in open(path):
-        if (logID in line and "tag=ZONE_POSITION" in line):
+        logIDStr = "id=" + logID
+        if (logIDStr in line and "tag=ZONE_POSITION" in line):
             return line[line.index("value=") + 6 : len(line) - 1]

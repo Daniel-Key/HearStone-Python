@@ -367,7 +367,28 @@ def controlCommand(instance, phrase):
 
 def specifyHandCardStat(instance, phrase, line):
     if (any(x in phrase for x in SimilarWords.stats)):
-        VoiceCommands.speakCardStats(instance, line)
+        statsToSpeak = ["cost", "attack", "health"]
+        VoiceCommands.speakCardStats(instance, line, statsToSpeak)
+    elif (any(x in phrase for x in SimilarWords.cost)
+        or any(x in phrase for x in SimilarWords.attack)
+        or any(x in phrase for x in SimilarWords.health)
+        or any(x in phrase for x in SimilarWords.durability)):
+        statsToSpeak = []
+        if (any(x in phrase for x in SimilarWords.cost)):
+            statsToSpeak.append("cost")
+        if (any(x in phrase for x in SimilarWords.attack)):
+            statsToSpeak.append("attack")
+        if (any(x in phrase for x in SimilarWords.health)):
+            statsToSpeak.append("health")
+        if (any(x in phrase for x in SimilarWords.durability)):
+            statsToSpeak.append("durability")
+        VoiceCommands.speakCardStats(instance, line, statsToSpeak)
+    elif (any(x in phrase for x in SimilarWords.text)):
+        VoiceCommands.speakCardText(instance, line)
+    elif (any(x in phrase for x in SimilarWords.attributes)):
+        VoiceCommands.speakCardAttributes(instance, line)
+    else:
+        VoiceCommands.speakCardName(instance, line)
 
 
 def feedbackCommand(instance, phrase):
@@ -444,4 +465,4 @@ def feedbackCommand(instance, phrase):
             VoiceCommands.speakEnemyBoardMinion(instance, 6)
         elif ((len(instance.enemyMinions) > 6) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.seven))):
             VoiceCommands.speakEnemyBoardMinion(instance, 7)
-    print()
+    print() 

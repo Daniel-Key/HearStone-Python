@@ -6,6 +6,14 @@ import threading
 def bing():
     playsound('./Sounds/bing.wav')
 
+def baBing():
+    playsound('./Sounds/baBing.wav')
+
 def bingThreaded():
     bingThread = threading.Thread(target=bing, args=(), daemon=True)
     bingThread.start()
+
+def baBingThreaded():
+    baBingThread = threading.Thread(target=baBing, args=(), daemon=True)
+    baBingThread.start()
+

@@ -1,6 +1,7 @@
 import MouseControl
 import API
 import time
+import re
 
 from gtts import gTTS 
 import os
@@ -927,7 +928,7 @@ def speakCardName(instance, line):
     name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
     speakString(instance, name)
 
-def speakCardStats(instance, line):
+def speakCardStats(instance, line, statsToSpeak):
     cardType = "" 
     try:
         cardType = line[line.index("\"type\":\"") + 8: line.index("\",\"faction")]
@@ -944,30 +945,76 @@ def speakCardStats(instance, line):
         except:
             None
 
-    #If card is a minion, speak cost, attack and health
+    # If card is a minion, speak cost, attack and health
     if cardType == "Minion":
-        cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
-        attack = line[line.index("\"attack\":") + 9: line.index(",\"health")]
-        try:
-            health = line[line.index("\"health\":") + 9: line.index(",\"text")]
-        except:
-            health = line[line.index("\"health\":") + 9: line.index(",\"flavor")]
-        stats = ("cost: " + cost + ", attack: " + attack + ", health: " + health)
-        speakString(instance, stats)
-    
+        statsString = ""
+        if ("cost" in statsToSpeak):
+            cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
+            costString = str(", cost " + cost)
+            statsString += costString
+        if ("attack" in statsToSpeak):
+            attack = line[line.index("\"attack\":") + 9: line.index(",\"health")]
+            attackString = str(", attack " + attack)
+            statsString += attackString
+        if ("health" in statsToSpeak):
+            try:
+                health = line[line.index("\"health\":") + 9: line.index(",\"text")]
+            except:
+                health = line[line.index("\"health\":") + 9: line.index(",\"flavor")]
+            healthString = str(", health " + health)
+            statsString += healthString
+        if (statsString != ""):
+            speakString(instance, statsString)
+        else:
+            print("Invalid statistic(s) to speak for minion")
+   
+    # If card is a spell, speak cost
     elif cardType == "Spell":
-        cost = line[line.index("\"cost\":") + 7: line.index(",\"text")]
-        stats = str("cost: " + cost)
-        speakString(instance, stats)
-
+        statsString = ""
+        if ("cost" in statsToSpeak):
+            cost = line[line.index("\"cost\":") + 7: line.index(",\"text")]
+            statsString = str("cost " + cost)
+            speakString(instance, statsString)
+        else:
+            print("Invalid statistic(s) to speak for spell")
+    # If card is a weapon, speak cost, attack and durability
     elif cardType == "Weapon":
-        cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
-        attack = line[line.index("\"attack\":") + 9: line.index(",\"durability")]
-        durability = line[line.index("\"durability\":") + 13: line.index(",\"text")]
-        stats = ("cost: " + cost + ", attack: " + attack + ", durability: " + durability)
-        speakString(instance, stats)
+        statsString = ""
+        if ("cost" in statsToSpeak):
+            cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
+            costString = str(", cost " + cost)
+            statsString += costString
+        if ("attack" in statsToSpeak):
+            attack = line[line.index("\"attack\":") + 9: line.index(",\"health")]
+            attackString = str(", attack " + attack)
+            statsString += attackString
+        if ("durability" in statsToSpeak):
+            durability = line[line.index("\"durability\":") + 13: line.index(",\"text")]
+            durabilityString = str(", durability " + durability)
+            statsString += durabilityString
+        if (statsString != ""):
+            speakString(instance, statsString)
+        else:
+            print("Invalid statistic(s) to speak for weapon")
 
-    #If card is a spell, speak cost
+
+def speakCardText(instance, line):
+    text = ""
+    try:
+        text = line[line.index("\"text\":\"") + 8: line.index("\",\"flavor")]
+    except:
+        speakString(instance, "None")
+        print("Card does not have any text")
+    text = re.sub('<[^>]+>', '', text)
+    text = re.sub('\[[^>]+\]', '', text)
+    text = text.replace('$', '')
+    text = text.replace('_', ' ')
+    text = text.replace('/', ' ')
+    text = text.replace('\\n', ' ')
+    text = text.replace('\\', '')
+    if (text != ""):
+        speakString(instance, text)
+
 
 def speakAllHandCards(instance):
     for i in instance.handCards:

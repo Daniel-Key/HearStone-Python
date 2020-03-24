@@ -96,11 +96,12 @@ def selectOpponent(number):
 def startGame():
     MouseControl.moveClickFraction(0.75, 0.85)
 
-def playCardMouseFraction(x, y):
+def playCardMouseFraction(x, y, releaseMouse):
     MouseControl.moveMouseDownFraction(x, y)
-    MouseControl.moveMouseUpFraction(0.5, 0.47)
+    if releaseMouse:
+        MouseControl.moveMouseUpFraction(0.5, 0.47)
 
-def playCard(instance, number):
+def playCard(instance, number, releaseMouse):
     # for i in instance.handCards:
     #     print(i)
     instance.lastCardPlayed = str(instance.handCards[number-1])
@@ -108,133 +109,227 @@ def playCard(instance, number):
         print("Invalid card to play")
     elif (len(instance.handCards) == 1):
         if (number == 1):
-            playCardMouseFraction(0.48, 0.93)
+            playCardMouseFraction(0.48, 0.93, releaseMouse)
     elif (len(instance.handCards) == 2):
         if (number == 1):
-            playCardMouseFraction(0.45, 0.93)
+            playCardMouseFraction(0.45, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.52, 0.93)
+            playCardMouseFraction(0.52, 0.93, releaseMouse)
     elif (len(instance.handCards) == 3):
         if (number == 1):
-            playCardMouseFraction(0.41, 0.93)
+            playCardMouseFraction(0.41, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.48, 0.93)
+            playCardMouseFraction(0.48, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.55, 0.93)
+            playCardMouseFraction(0.55, 0.93, releaseMouse)
     elif (len(instance.handCards) == 4):
         if (number == 1):
-            playCardMouseFraction(0.38, 0.93)
+            playCardMouseFraction(0.38, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.45, 0.93)
+            playCardMouseFraction(0.45, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.51, 0.93)
+            playCardMouseFraction(0.51, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.58, 0.93)
+            playCardMouseFraction(0.58, 0.93, releaseMouse)
     elif (len(instance.handCards) == 5):
         if (number == 1):
-            playCardMouseFraction(0.37, 0.93)
+            playCardMouseFraction(0.37, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.43, 0.93)
+            playCardMouseFraction(0.43, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.48, 0.93)
+            playCardMouseFraction(0.48, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.54, 0.93)
+            playCardMouseFraction(0.54, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.59, 0.93)
+            playCardMouseFraction(0.59, 0.93, releaseMouse)
     elif (len(instance.handCards) == 6):
         if (number == 1):
-            playCardMouseFraction(0.36, 0.93)
+            playCardMouseFraction(0.36, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.40, 0.93)
+            playCardMouseFraction(0.40, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.44, 0.93)
+            playCardMouseFraction(0.44, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.50, 0.93)
+            playCardMouseFraction(0.50, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.55, 0.93)
+            playCardMouseFraction(0.55, 0.93, releaseMouse)
         if (number == 6):
-            playCardMouseFraction(0.60, 0.93)
+            playCardMouseFraction(0.60, 0.93, releaseMouse)
     elif (len(instance.handCards) == 7):
         if (number == 1):
-            playCardMouseFraction(0.34, 0.93)
+            playCardMouseFraction(0.34, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.39, 0.93)
+            playCardMouseFraction(0.39, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.44, 0.93)
+            playCardMouseFraction(0.44, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.48, 0.93)
+            playCardMouseFraction(0.48, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.53, 0.93)
+            playCardMouseFraction(0.53, 0.93, releaseMouse)
         if (number == 6):
-            playCardMouseFraction(0.56, 0.93)
+            playCardMouseFraction(0.56, 0.93, releaseMouse)
         if (number == 7):
-            playCardMouseFraction(0.60, 0.93)
+            playCardMouseFraction(0.60, 0.93, releaseMouse)
     elif (len(instance.handCards) == 8):
         if (number == 1):
-            playCardMouseFraction(0.34, 0.93)
+            playCardMouseFraction(0.34, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.38, 0.93)
+            playCardMouseFraction(0.38, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.42, 0.93)
+            playCardMouseFraction(0.42, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.46, 0.93)
+            playCardMouseFraction(0.46, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.49, 0.93)
+            playCardMouseFraction(0.49, 0.93, releaseMouse)
         if (number == 6):
-            playCardMouseFraction(0.54, 0.93)
+            playCardMouseFraction(0.54, 0.93, releaseMouse)
         if (number == 7):
-            playCardMouseFraction(0.57, 0.93)
+            playCardMouseFraction(0.57, 0.93, releaseMouse)
         if (number == 8):
-            playCardMouseFraction(0.61, 0.93)
+            playCardMouseFraction(0.61, 0.93, releaseMouse)
     elif (len(instance.handCards) == 9):
         if (number == 1):
-            playCardMouseFraction(0.33, 0.93)
+            playCardMouseFraction(0.33, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.38, 0.93)
+            playCardMouseFraction(0.38, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.41, 0.93)
+            playCardMouseFraction(0.41, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.44, 0.93)
+            playCardMouseFraction(0.44, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.47, 0.93)
+            playCardMouseFraction(0.47, 0.93, releaseMouse)
         if (number == 6):
-            playCardMouseFraction(0.51, 0.93)
+            playCardMouseFraction(0.51, 0.93, releaseMouse)
         if (number == 7):
-            playCardMouseFraction(0.55, 0.93)
+            playCardMouseFraction(0.55, 0.93, releaseMouse)
         if (number == 8):
-            playCardMouseFraction(0.58, 0.93)
+            playCardMouseFraction(0.58, 0.93, releaseMouse)
         if (number == 9):
-            playCardMouseFraction(0.62, 0.93)
+            playCardMouseFraction(0.62, 0.93, releaseMouse)
     elif (len(instance.handCards) == 10):
         if (number == 1):
-            playCardMouseFraction(0.33, 0.93)
+            playCardMouseFraction(0.33, 0.93, releaseMouse)
         if (number == 2):
-            playCardMouseFraction(0.36, 0.93)
+            playCardMouseFraction(0.36, 0.93, releaseMouse)
         if (number == 3):
-            playCardMouseFraction(0.39, 0.93)
+            playCardMouseFraction(0.39, 0.93, releaseMouse)
         if (number == 4):
-            playCardMouseFraction(0.42, 0.93)
+            playCardMouseFraction(0.42, 0.93, releaseMouse)
         if (number == 5):
-            playCardMouseFraction(0.45, 0.93)
+            playCardMouseFraction(0.45, 0.93, releaseMouse)
         if (number == 6):
-            playCardMouseFraction(0.49, 0.93)
+            playCardMouseFraction(0.49, 0.93, releaseMouse)
         if (number == 7):
-            playCardMouseFraction(0.52, 0.93)
+            playCardMouseFraction(0.52, 0.93, releaseMouse)
         if (number == 8):
-            playCardMouseFraction(0.55, 0.93)
+            playCardMouseFraction(0.55, 0.93, releaseMouse)
         if (number == 9):
-            playCardMouseFraction(0.58, 0.93)
+            playCardMouseFraction(0.58, 0.93, releaseMouse)
         if (number == 10):
-            playCardMouseFraction(0.62, 0.93)
-
-
-def playCardToPositionMouseFraction(x1, y1, x2, y2):
-    MouseControl.moveMouseDownFraction(x1, y1)
-    MouseControl.moveMouseUpFraction(x2, y2)
+            playCardMouseFraction(0.62, 0.93, releaseMouse)
 
 
 def playCardToPosition(instance, cardNumber, positionNumber):
-    largechunkoftext = 1
+    playCard(instance, cardNumber, False)
+    if ((positionNumber > 7) or (positionNumber > (len(instance.friendlyMinions)+1))):
+        print("Invalid minion position")
+    elif(len(instance.friendlyMinions) == 7):
+        print("Max number of friendly minions on board")
+    else:
+        #Friendly minion positions  
+        if (len(instance.friendlyMinions) == 0):
+            if (positionNumber == 1):
+                x1 = 0.5
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 1):
+            if (positionNumber == 1):
+                x1 = 0.47
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.54
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 2):
+            if (positionNumber == 1):
+                x1 = 0.43
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.5
+                y1 = 0.55
+            elif (positionNumber == 3):
+                x1 = 0.58
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 3):
+            if (positionNumber == 1):
+                x1 = 0.39
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.47
+                y1 = 0.55
+            elif (positionNumber == 3):
+                x1 = 0.54
+                y1 = 0.55
+            elif (positionNumber == 4):
+                x1 = 0.61
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 4):
+            if (positionNumber == 1):
+                x1 = 0.36
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.43
+                y1 = 0.55
+            elif (positionNumber == 3):
+                x1 = 0.5
+                y1 = 0.55
+            elif (positionNumber == 4):
+                x1 = 0.58
+                y1 = 0.55
+            elif (positionNumber == 5):
+                x1 = 0.65
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 5):
+            if (positionNumber == 1):
+                x1 = 0.32
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.39
+                y1 = 0.55
+            elif (positionNumber == 3):
+                x1 = 0.47
+                y1 = 0.55
+            elif (positionNumber == 4):
+                x1 = 0.54
+                y1 = 0.55
+            elif (positionNumber == 5):
+                x1 = 0.61
+                y1 = 0.55
+            elif (positionNumber == 6):
+                x1 = 0.68
+                y1 = 0.55
+        elif (len(instance.friendlyMinions) == 6):
+            if (positionNumber == 1):
+                x1 = 0.28
+                y1 = 0.55
+            elif (positionNumber == 2):
+                x1 = 0.36
+                y1 = 0.55
+            elif (positionNumber == 3):
+                x1 = 0.43
+                y1 = 0.55
+            elif (positionNumber == 4):
+                x1 = 0.5
+                y1 = 0.55
+            elif (positionNumber == 5):
+                x1 = 0.58
+                y1 = 0.55
+            elif (positionNumber == 6):
+                x1 = 0.65
+                y1 = 0.55
+            elif (positionNumber == 7):
+                x1 = 0.72
+                y1 = 0.55
+        MouseControl.mouseDownFraction(x1, y1)
+        MouseControl.mouseUpFraction(x1, y1)
 
 
 def makeAttackMouseFraction(x1, y1, x2, y2):
@@ -831,6 +926,48 @@ def speakString(instance, line):
 def speakCardName(instance, line):
     name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
     speakString(instance, name)
+
+def speakCardStats(instance, line):
+    cardType = "" 
+    try:
+        cardType = line[line.index("\"type\":\"") + 8: line.index("\",\"faction")]
+    except:
+        None
+    if (cardType == ""):
+        try:
+            cardType = line[line.index("\"type\":\"") + 8: line.index("\",\"rarity")]
+        except:
+            None
+    if (cardType == ""):
+        try:
+            cardType = line[line.index("\"type\":\"") + 8: line.index("\",\"cost")]
+        except:
+            None
+
+    #If card is a minion, speak cost, attack and health
+    if cardType == "Minion":
+        cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
+        attack = line[line.index("\"attack\":") + 9: line.index(",\"health")]
+        try:
+            health = line[line.index("\"health\":") + 9: line.index(",\"text")]
+        except:
+            health = line[line.index("\"health\":") + 9: line.index(",\"flavor")]
+        stats = ("cost: " + cost + ", attack: " + attack + ", health: " + health)
+        speakString(instance, stats)
+    
+    elif cardType == "Spell":
+        cost = line[line.index("\"cost\":") + 7: line.index(",\"text")]
+        stats = str("cost: " + cost)
+        speakString(instance, stats)
+
+    elif cardType == "Weapon":
+        cost = line[line.index("\"cost\":") + 7: line.index(",\"attack")]
+        attack = line[line.index("\"attack\":") + 9: line.index(",\"durability")]
+        durability = line[line.index("\"durability\":") + 13: line.index(",\"text")]
+        stats = ("cost: " + cost + ", attack: " + attack + ", durability: " + durability)
+        speakString(instance, stats)
+
+    #If card is a spell, speak cost
 
 def speakAllHandCards(instance):
     for i in instance.handCards:

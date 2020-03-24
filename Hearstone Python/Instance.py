@@ -15,11 +15,11 @@ class Instance:
     mulliganComplete = False
     #Contains full card info
     mulliganList = []
-    handCards = dict()
-    prevHandCards = dict()
+    handCards = []
+    prevHandCards = []
     lastCardPlayed = "None"
+    lastCardPlayedID = -1
     cardApiInfo = {}
     friendlyMinions = []
     enemyMinions = []
-    lastCardPlayedID = -1
     playerName = ""

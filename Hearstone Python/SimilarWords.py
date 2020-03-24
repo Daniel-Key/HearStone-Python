@@ -25,6 +25,10 @@ allSet = {"all", "lol", "tool"}
 board = {"board", "bored", "old"}
 previous = {"previous"}
 nextTheWord = {"next"}
+play = {"play"}
+position = {"position"}
+
+stats = {"stats"}
 
 zero = {"zero", "0"}
 one = {"one", "1"}

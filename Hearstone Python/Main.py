@@ -48,7 +48,7 @@ def loop():
                 print("check")
                 VoiceRecognition.takeInput(instance, True)
                 inputReady = False
-            elif keyboard.is_pressed('\\'): 
+            elif keyboard.is_pressed('\b'): 
                 print("check")
                 inputReady = False
                 VoiceRecognition.takeInput(instance, False)
@@ -58,6 +58,7 @@ def loop():
             else:
                 pass
         except Exception as e:
+            print("Exception: ")
             print(e)
             break
     

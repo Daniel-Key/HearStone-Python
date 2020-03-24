@@ -144,33 +144,75 @@ def controlCommand(instance, phrase):
     elif ((any(x in phrase for x in SimilarWords.start)) and (any(x in phrase for x in SimilarWords.game))):
         VoiceCommands.startGame()
 
+    # Play card to position
+    elif ((any(x in phrase for x in SimilarWords.play)) and (any(x in phrase for x in SimilarWords.position))):
+        cardNo = -1
+        positionNo = -1
+
+        if (any(("play " + x) in phrase for x in SimilarWords.one)):
+            cardNo = 1
+        elif (any(("play " + x) in phrase for x in SimilarWords.two)):
+            cardNo = 2
+        elif (any(("play " + x) in phrase for x in SimilarWords.three)):
+            cardNo = 3
+        elif (any(("play " + x) in phrase for x in SimilarWords.four)):
+            cardNo = 4
+        elif (any(("play " + x) in phrase for x in SimilarWords.five)):
+            cardNo = 5
+        elif (any(("play " + x) in phrase for x in SimilarWords.six)):
+            cardNo = 6
+        elif (any(("play " + x) in phrase for x in SimilarWords.seven)):
+            cardNo = 7
+        elif (any(("play " + x) in phrase for x in SimilarWords.eight)):
+            cardNo = 8
+        elif (any(("play " + x) in phrase for x in SimilarWords.nine)):
+            cardNo = 9
+        elif (any(("play " + x) in phrase for x in SimilarWords.ten)):
+            cardNo = 10
+
+        if (any(("position " + x) in phrase for x in SimilarWords.one)):
+            positionNo = 1
+        elif (any(("position " + x) in phrase for x in SimilarWords.two)):
+            positionNo = 2
+        elif (any(("position " + x) in phrase for x in SimilarWords.three)):
+            positionNo = 3
+        elif (any(("position " + x) in phrase for x in SimilarWords.four)):
+            positionNo = 4
+        elif (any(("position " + x) in phrase for x in SimilarWords.five)):
+            positionNo = 5
+        elif (any(("position " + x) in phrase for x in SimilarWords.six)):
+            positionNo = 6
+        elif (any(("position " + x) in phrase for x in SimilarWords.seven)):
+            positionNo = 7
+
+        if (cardNo != -1 and positionNo != -1):
+            VoiceCommands.playCardToPosition(instance, cardNo, positionNo)
+    
     # Play card
     # elif ("play card" in phrase or "play cod" in phrase or "play clyde" in phrase or "play cars" in phrase or "play hard" in phrase):
     elif ("play" in phrase):
         if (any(x in phrase for x in SimilarWords.one)):
-            VoiceCommands.playCard(instance, 1)
+            VoiceCommands.playCard(instance, 1, True)
         elif (any(x in phrase for x in SimilarWords.two)):
-            VoiceCommands.playCard(instance, 2)
+            VoiceCommands.playCard(instance, 2, True)
         elif (any(x in phrase for x in SimilarWords.three)):
-            print(instance.handCards)
-            print("PLAY THREE")
-            VoiceCommands.playCard(instance, 3)
+            VoiceCommands.playCard(instance, 3, True)
         elif (any(x in phrase for x in SimilarWords.four)):
-            VoiceCommands.playCard(instance, 4)
+            VoiceCommands.playCard(instance, 4, True)
         elif (any(x in phrase for x in SimilarWords.five)):
-            VoiceCommands.playCard(instance, 5)
+            VoiceCommands.playCard(instance, 5, True)
         elif (any(x in phrase for x in SimilarWords.six)):
-            VoiceCommands.playCard(instance, 6)
+            VoiceCommands.playCard(instance, 6, True)
         elif (any(x in phrase for x in SimilarWords.seven)):
-            VoiceCommands.playCard(instance, 7)
+            VoiceCommands.playCard(instance, 7, True)
         elif (any(x in phrase for x in SimilarWords.eight)):
-            VoiceCommands.playCard(instance, 8)
+            VoiceCommands.playCard(instance, 8, True)
         elif (any(x in phrase for x in SimilarWords.nine)):
-            VoiceCommands.playCard(instance, 9)
+            VoiceCommands.playCard(instance, 9, True)
         elif (any(x in phrase for x in SimilarWords.ten)):
-            VoiceCommands.playCard(instance, 10)
+            VoiceCommands.playCard(instance, 10, True)
     elif (any(x in phrase for x in SimilarWords.playCardTwo)):
-        VoiceCommands.playCard(instance, 2)
+        VoiceCommands.playCard(instance, 2, True)
 
     # Attack with minion or hero
     elif (any(x in phrase for x in SimilarWords.attack)):
@@ -323,6 +365,11 @@ def controlCommand(instance, phrase):
         VoiceCommands.cancel()
 
 
+def specifyHandCardStat(instance, phrase, line):
+    if (any(x in phrase for x in SimilarWords.stats)):
+        VoiceCommands.speakCardStats(instance, line)
+
+
 def feedbackCommand(instance, phrase):
     print()
 
@@ -332,34 +379,34 @@ def feedbackCommand(instance, phrase):
             VoiceCommands.speakAllHandCards(instance)
         elif ((len(instance.handCards) > 0) and (any(x in phrase for x in SimilarWords.one))):
             line = instance.handCards[0]
-            VoiceCommands.speakCardName(instance, line)
+            specifyHandCardStat(instance, phrase, line) 
         elif ((len(instance.handCards) > 1) and (any(x in phrase for x in SimilarWords.two))):
             line = instance.handCards[1]
-            VoiceCommands.speakCardName(instance, line)
+            specifyHandCardStat(instance, phrase, line) 
         elif ((len(instance.handCards) > 2) and (any(x in phrase for x in SimilarWords.three))):
             line = instance.handCards[2]
-            VoiceCommands.speakCardName(instance, line)
+            specifyHandCardStat(instance, phrase, line) 
         elif ((len(instance.handCards) > 3) and (any(x in phrase for x in SimilarWords.four))):
             line = instance.handCards[3]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 4) and (any(x in phrase for x in SimilarWords.five))):
             line = instance.handCards[4]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 5) and (any(x in phrase for x in SimilarWords.six))):
             line = instance.handCards[5]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 6) and (any(x in phrase for x in SimilarWords.seven))):
             line = instance.handCards[6]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 7) and (any(x in phrase for x in SimilarWords.eight))):
             line = instance.handCards[7]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 8) and (any(x in phrase for x in SimilarWords.nine))):
             line = instance.handCards[8]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
         elif ((len(instance.handCards) > 9) and (any(x in phrase for x in SimilarWords.ten))):
             line = instance.handCards[9]
-            VoiceCommands.speakCardName(instance, line) 
+            specifyHandCardStat(instance, phrase, line)  
     elif (any(x in phrase for x in SimilarWords.handAll)):
         VoiceCommands.speakAllHandCards(instance)
 

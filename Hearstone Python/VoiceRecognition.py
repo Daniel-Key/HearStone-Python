@@ -437,32 +437,40 @@ def feedbackCommand(instance, phrase):
         if (any(x in phrase for x in SimilarWords.allSet)):
             VoiceCommands.speakAllBoardMinions(instance)
         elif ((len(instance.friendlyMinions) > 0) and (any(("friendly " + x) in phrase for x in SimilarWords.one))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 1)
+            VoiceCommands.speakBoardMinion(instance, True, 1)
         elif ((len(instance.friendlyMinions) > 1) and (any(("friendly " + x) in phrase for x in SimilarWords.two))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 2)
+            VoiceCommands.speakBoardMinion(instance, True, 2)
         elif ((len(instance.friendlyMinions) > 2) and (any(("friendly " + x) in phrase for x in SimilarWords.three))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 3)
+            VoiceCommands.speakBoardMinion(instance, True, 3)
         elif ((len(instance.friendlyMinions) > 3) and (any(("friendly " + x) in phrase for x in SimilarWords.four))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 4)
+            VoiceCommands.speakBoardMinion(instance, True, 4)
         elif ((len(instance.friendlyMinions) > 4) and (any(("friendly " + x) in phrase for x in SimilarWords.five))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 5)
+            VoiceCommands.speakBoardMinion(instance, True, 5)
         elif ((len(instance.friendlyMinions) > 5) and (any(("friendly " + x) in phrase for x in SimilarWords.six))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 6)
+            VoiceCommands.speakBoardMinion(instance, True, 6)
         elif ((len(instance.friendlyMinions) > 6) and (any(("friendly " + x) in phrase for x in SimilarWords.seven))):
-            VoiceCommands.speakFriendlyBoardMinion(instance, 7)
+            VoiceCommands.speakBoardMinion(instance, True, 7)
 
-        elif ((len(instance.enemyMinions) > 0) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.one))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 1)
-        elif ((len(instance.enemyMinions) > 1) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.two))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 2)
-        elif ((len(instance.enemyMinions) > 2) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.three))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 3)
-        elif ((len(instance.enemyMinions) > 3) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.four))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 4)
-        elif ((len(instance.enemyMinions) > 4) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.five))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 5)
-        elif ((len(instance.enemyMinions) > 5) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.six))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 6)
-        elif ((len(instance.enemyMinions) > 6) and (any((("enemy " + x) or ("anime " + x)) in phrase for x in SimilarWords.seven))):
-            VoiceCommands.speakEnemyBoardMinion(instance, 7)
-    print() 
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.one)) or (any(("anime " + x) in phrase for x in SimilarWords.one)) or (any(("anime" + x) in phrase for x in SimilarWords.one))):
+            VoiceCommands.speakBoardMinion(instance, False, 1)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.two)) or (any(("anime " + x) in phrase for x in SimilarWords.two)) or (any(("anime" + x) in phrase for x in SimilarWords.two))):
+            VoiceCommands.speakBoardMinion(instance, False, 2)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.three)) or (any(("anime " + x) in phrase for x in SimilarWords.three)) or (any(("anime" + x) in phrase for x in SimilarWords.three))):
+            VoiceCommands.speakBoardMinion(instance, False, 3)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.four)) or (any(("anime " + x) in phrase for x in SimilarWords.four)) or (any(("anime" + x) in phrase for x in SimilarWords.four))):
+            VoiceCommands.speakBoardMinion(instance, False, 4)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.five)) or (any(("anime " + x) in phrase for x in SimilarWords.five)) or (any(("anime" + x) in phrase for x in SimilarWords.five))):
+            VoiceCommands.speakBoardMinion(instance, False, 5)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.six)) or (any(("anime " + x) in phrase for x in SimilarWords.six)) or (any(("anime" + x) in phrase for x in SimilarWords.six))):
+            VoiceCommands.speakBoardMinion(instance, False, 6)
+        elif ((len(instance.enemyMinions) > 0) and (any(("enemy " + x) in phrase for x in SimilarWords.seven)) or (any(("anime " + x) in phrase for x in SimilarWords.seven)) or (any(("anime" + x) in phrase for x in SimilarWords.seven))):
+            VoiceCommands.speakBoardMinion(instance, False, 7) 
+
+    elif (any(x in phrase for x in SimilarWords.weapon)):
+        if (any(x in phrase for x in SimilarWords.allSet)):
+            VoiceCommands.speakFriendlyWeapon(instance)
+            VoiceCommands.speakEnemyWeapon(instance)
+        elif (any(x in phrase for x in SimilarWords.friendly)):
+            VoiceCommands.speakFriendlyWeapon(instance)
+        elif (any(x in phrase for x in SimilarWords.opponent)):
+            VoiceCommands.speakEnemyWeapon(instance)

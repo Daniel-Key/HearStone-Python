@@ -1,5 +1,6 @@
 import GameState
 import API
+import Weapon
 
 path = "D:/Hearthstone/Logs/Power.log"
 # path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
@@ -45,8 +46,70 @@ def processLogFileLine(instance, line) :
         #     card = i[i.index("cardId"):]
         #     print(card[card.index("name") + 7 : card.index("cardSet") - 3])
         # print()
-    if "TAG_CHANGE" in line and "tag=DAMAGE" in line:
-        dostuff
+    if ("TAG_CHANGE" in line and "zone=HAND" in line and "player=1" in line and "tag=ZONE value=PLAY" in line):
+        cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+        logID = line[line.index("id=") + 3 : line.index("zone=")]
+        if (cardID == ""):
+            cardID = lookupCardID(logID)
+
+        cardInfo = ""
+        if cardID in instance.cardApiInfo:
+            cardInfo = instance.cardApiInfo[cardID]
+        else:
+            cardInfo = API.requestCardInfo(cardID)
+            instance.cardApiInfo[cardID] = cardInfo
+
+        if("\"type\":\"Weapon\"" in cardInfo):
+            weapon = Weapon.Weapon(instance, cardID, logID)
+            instance.friendlyWeaponsInPlay.append(weapon)
+    if ("FULL_ENTITY - Updating [entityName=Wicked Knife" in line and "zone=PLAY zonePos=0 cardId=CS2_082 player=1] CardID=CS2_082" in line):
+        cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+        logID = line[line.index("id=") + 3 : line.index("zone=")]
+        if (cardID == ""):
+            cardID = lookupCardID(logID)
+
+        cardInfo = ""
+        if cardID in instance.cardApiInfo:
+            cardInfo = instance.cardApiInfo[cardID]
+        else:
+            cardInfo = API.requestCardInfo(cardID)
+            instance.cardApiInfo[cardID] = cardInfo
+
+        weapon = Weapon.Weapon(instance, cardID, logID)
+        instance.friendlyWeaponsInPlay.append(weapon)
+    if ("TAG_CHANGE" in line and "zone=PLAY" in line and "player=1" in line and "tag=ZONE value=GRAVEYARD" in line):
+        if (len(instance.friendlyWeaponsInPlay) > 0):
+            cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
+            logID = line[line.index("id=") + 3 : line.index("zone=")]
+            if (cardID == ""):
+                cardID = lookupCardID(logID)
+
+            cardInfo = ""
+            if cardID in instance.cardApiInfo:
+                cardInfo = instance.cardApiInfo[cardID]
+            else:
+                cardInfo = API.requestCardInfo(cardID)
+                instance.cardApiInfo[cardID] = cardInfo
+
+            if("\"type\":\"Weapon\"" in cardInfo):
+                weaponToRemove = Weapon.Weapon(cardID, logID)
+                for weapon in instance.friendlyWeaponsInPlay:
+                    if weapon == weaponToRemove:
+                        weaponToRemove = weapon
+                instance.friendlyWeaponsInPlay.remove(weaponToRemove)
+    if ("TAG_CHANGE" in line and "tag=DAMAGE" in line and "zone=PLAY" in line):
+        logID = line[line.index("id=") + 3 : line.index("zone=")]
+        
+        thisMinion = ""
+        for minion in instance.friendlyMinions:
+            if minion.logID == logID:
+                thisMinion = minion
+        for minion in instance.enemyMinions:
+            if minion.logID == logID:
+                thisMinion = minion
+
+        damage = line[line.index("value=") + 6:]
+        thisMinion.currentHealth = int(thisMinion.maxHealth) - int(damage)
 
 # Will be in main loop looking for game state changes
 def checkForLogFileUpdates(instance):

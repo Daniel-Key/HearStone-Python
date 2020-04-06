@@ -31,8 +31,10 @@ def singlePlayer():
 
 def selectDifficulty(difficulty):
     if (difficulty == "normal"):
+        MouseControl.moveClickFraction(0.73, 0.13)
         MouseControl.moveClickFraction(0.75, 0.2)
     else:
+        MouseControl.moveClickFraction(0.73, 0.13)
         MouseControl.moveClickFraction(0.75, 0.27)
     time.sleep(0.1)
     MouseControl.moveClickFraction(0.75, 0.85)
@@ -985,11 +987,15 @@ def speakCardStats(instance, line, statsToSpeak):
             costString = str(", cost " + cost)
             statsString += costString
         if ("attack" in statsToSpeak):
-            attack = line[line.index("\"attack\":") + 9: line.index(",\"health")]
+            attack = line[line.index("\"attack\":") + 9: line.index(",\"durability")]
             attackString = str(", attack " + attack)
             statsString += attackString
         if ("durability" in statsToSpeak):
-            durability = line[line.index("\"durability\":") + 13: line.index(",\"text")]
+            durability = ""
+            try:
+                durability = line[line.index("\"durability\":") + 13: line.index(",\"text")]
+            except:
+                durability = line[line.index("\"durability\":") + 13: line.index(",\"playerClass")]
             durabilityString = str(", durability " + durability)
             statsString += durabilityString
         if (statsString != ""):
@@ -1021,8 +1027,13 @@ def speakAllHandCards(instance):
         line = instance.handCards[i]
         speakCardName(instance, line)
 
-def speakFriendlyBoardMinion(instance, number):
-    cardID = instance.friendlyMinions[number-1]
+def speakBoardMinion(instance, isFriendly, number):
+    minion = "" 
+    if isFriendly == True:
+        minion = instance.friendlyMinions[number-1]
+    else:
+        minion = instance.enemyMinions[number-1]
+    cardID = minion.cardID
     cardInfo = ""
 
     if cardID in instance.cardApiInfo:
@@ -1031,37 +1042,26 @@ def speakFriendlyBoardMinion(instance, number):
         cardInfo = API.requestCardInfo(cardID)
         instance.cardApiInfo[cardID] = cardInfo
 
-    speakCardName(instance, cardInfo)
-
-def speakEnemyBoardMinion(instance, number):
-    cardID = instance.enemyMinions[number-1]
-    cardInfo = ""
-
-    if cardID in instance.cardApiInfo:
-        cardInfo = instance.cardApiInfo[cardID]
-    else:
-        cardInfo = API.requestCardInfo(cardID)
-        instance.cardApiInfo[cardID] = cardInfo
-
-    speakCardName(instance, cardInfo)
+    speechString = cardInfo[cardInfo.index("\"name\":\"") + 8: cardInfo.index("\",\"cardSet")]
+    speechString += (", attack: " + str(minion.attack))
+    speechString += (", health: " + str(minion.currentHealth))
+    speakString(instance, speechString)
 
 def speakAllBoardMinions(instance):
-    speakString(instance, "Friendly minions")
+    speakString(instance, "Friendly minions: ")
     for i in range(len(instance.friendlyMinions)):
-        cardID = instance.friendlyMinions[i]
-        cardInfo = ""
-
-        if cardID in instance.cardApiInfo:
-            cardInfo = instance.cardApiInfo[cardID]
-        else:
-            cardInfo = API.requestCardInfo(cardID)
-            instance.cardApiInfo[cardID] = cardInfo
-
-        speakCardName(instance, cardInfo)
+        speakBoardMinion(instance, True, i)
         
-    speakString(instance, "Enemy minions")
+    speakString(instance, "Enemy minions: ")
     for i in range(len(instance.enemyMinions)):
-        cardID = instance.enemyMinions[i]
+        speakBoardMinion(instance, False, i)
+
+def speakFriendlyWeapon(instance):
+    if len(instance.friendlyWeapons) == 0:
+        speakString(instance, "No friendly weapon")
+    else:
+        weapon = instance.friendlyWeapons[0]
+        cardID = weapon.cardID
         cardInfo = ""
 
         if cardID in instance.cardApiInfo:
@@ -1069,5 +1069,28 @@ def speakAllBoardMinions(instance):
         else:
             cardInfo = API.requestCardInfo(cardID)
             instance.cardApiInfo[cardID] = cardInfo
+        
+        speechString = cardInfo[cardInfo.index("\"name\":\"") + 8: cardInfo.index("\",\"cardSet")]
+        speechString += (", attack: " + weapon.attack)
+        speechString += (", durability: " + weapon.durability)
+        speakString(instance, speechString)
+        
+def speakEnemyWeapon(instance):
+    if len(instance.enemyWeapons) == 0:
+        speakString(instance, "No enemy weapon")
+    else:
+        weapon = instance.enemyWeapons[0]
+        cardID = weapon.cardID
+        cardInfo = ""
 
-        speakCardName(instance, cardInfo)
+        if cardID in instance.cardApiInfo:
+            cardInfo = instance.cardApiInfo[cardID]
+        else:
+            cardInfo = API.requestCardInfo(cardID)
+            instance.cardApiInfo[cardID] = cardInfo
+        
+        speechString = cardInfo[cardInfo.index("\"name\":\"") + 8: cardInfo.index("\",\"cardSet")]
+        speechString += (", attack: " + str(weapon.attack))
+        speechString += (", durability: " + str(weapon.durability))
+        speakString(instance, speechString)
+

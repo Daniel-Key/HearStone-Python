@@ -22,4 +22,7 @@ class Instance:
     cardApiInfo = {}
     friendlyMinions = []
     enemyMinions = []
+    friendlyWeapons = []
+    friendlyWeaponsInPlay = []
+    enemyWeapons = []
     playerName = ""

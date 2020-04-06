@@ -7,7 +7,7 @@ normal = {"normal"}
 expert = {"expert"}
 deck = {"deck", "dick", "next", "text", "tech", "ek", "jet"}
 decks = {"decks", "dicks", "text", "techs", "eks", "jets", "dex", "TX", "desks"}
-opponent = {"opponent", "appointment", "exponent"}
+opponent = {"opponent", "appointment", "exponent", "enemy", "anime"}
 start = {"start"}
 game = {"game", "again"}
 attack = {"attack", "a tack", "tech"}
@@ -27,6 +27,7 @@ previous = {"previous"}
 nextTheWord = {"next"}
 play = {"play"}
 position = {"position"}
+minion = {"minion"}
 
 stats = {"stats"}
 health = {"health"}
@@ -34,6 +35,8 @@ durability = {"durability"}
 cost = {"cost"}
 text = {"text"}
 attributes = {"attributes"}
+weapon = {"weapon"}
+friendly = {"friendly"}
 
 zero = {"zero", "0"}
 one = {"one", "1"}

@@ -2,13 +2,15 @@ import API
 class Minion:
     cardID = ""
     logID = ""
+    zonePos = ""
     attack = -1
     maxHealth = -1
     currentHealth = -1
 
-    def __init__(self, instance, cardID, logID):
+    def __init__(self, instance, cardID, logID, zonePos):
         self.cardID = cardID
         self.logID = logID
+        self.zonePos = zonePos
 
         cardInfo = ""
         if cardID in instance.cardApiInfo:
@@ -37,5 +39,9 @@ class Minion:
 
     def __str__(self):
         return str("cardID: " + str(self.cardID) + ", logID: " + str(self.logID))
+
+    def __eq__(self, other):
+        return ((self.cardID, self.logID) ==
+                (other.cardID, other.logID))
 
     # Attributes/effects?

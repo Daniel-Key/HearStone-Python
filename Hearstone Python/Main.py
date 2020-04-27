@@ -37,6 +37,7 @@ inputReady = False
 
 def loop(): 
     global inputReady
+    MyLogParser.checkForGameStart(instance)
     while (instance.programRunning): 
         MyLogParser.checkForLogFileUpdates(instance)
         if not inputReady:
@@ -62,7 +63,7 @@ def loop():
         except Exception as e:
             print("Exception: ")
             print(e)
-            break
+            # break
     
     print("Program exiting")
 

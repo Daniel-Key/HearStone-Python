@@ -28,13 +28,15 @@ def endTurn():
 # Navigate to the single player hero selection screen
 def singlePlayer():
     MouseControl.moveClickFraction(0.5, 0.35)
+    time.sleep(0.1)
+    MouseControl.moveClickFraction(0.5, 0.35)
 
 def selectDifficulty(difficulty):
     if (difficulty == "normal"):
-        MouseControl.moveClickFraction(0.73, 0.13)
+        # MouseControl.moveClickFraction(0.73, 0.13)
         MouseControl.moveClickFraction(0.75, 0.2)
     else:
-        MouseControl.moveClickFraction(0.73, 0.13)
+        # MouseControl.moveClickFraction(0.73, 0.13)
         MouseControl.moveClickFraction(0.75, 0.27)
     time.sleep(0.1)
     MouseControl.moveClickFraction(0.75, 0.85)
@@ -93,6 +95,8 @@ def selectOpponent(number):
         MouseControl.moveClickFraction(0.75, 0.55)
     elif (number == 9):
         MouseControl.moveClickFraction(0.75, 0.62)
+    elif (number == 10):
+        MouseControl.moveClickFraction(0.75, 0.68)
 
 
 # Play game
@@ -859,6 +863,7 @@ def target(instance, targetNo, friendly):
 
 #Make mulligan choices
 def mulligan(instance, cards):
+    print(cards)
     if (len(instance.mulliganList) == 3):
         if (1 in cards):
             MouseControl.moveClickFraction(0.32, 0.47)
@@ -1023,11 +1028,14 @@ def speakCardText(instance, line):
 
 
 def speakAllHandCards(instance):
-    for i in instance.handCards:
-        line = instance.handCards[i]
-        speakCardName(instance, line)
+    stringToSpeak = ""
+    for line in instance.handCards:
+        name = line[line.index("\"name\":\"") + 8: line.index("\",\"cardSet")]
+        stringToSpeak += name
+        stringToSpeak += ", "
+    speakString(instance, stringToSpeak)
 
-def speakBoardMinion(instance, isFriendly, number):
+def speakBoardMinion(instance, isFriendly, number, speak):
     minion = "" 
     if isFriendly == True:
         minion = instance.friendlyMinions[number-1]
@@ -1041,20 +1049,31 @@ def speakBoardMinion(instance, isFriendly, number):
     else:
         cardInfo = API.requestCardInfo(cardID)
         instance.cardApiInfo[cardID] = cardInfo
-
+    
     speechString = cardInfo[cardInfo.index("\"name\":\"") + 8: cardInfo.index("\",\"cardSet")]
     speechString += (", attack: " + str(minion.attack))
     speechString += (", health: " + str(minion.currentHealth))
-    speakString(instance, speechString)
+    if (speak):
+        speakString(instance, speechString)
+    else:
+        speechString += ", "
+        return speechString
 
 def speakAllBoardMinions(instance):
-    speakString(instance, "Friendly minions: ")
+    speechString = ""
+    speechString += "Friendly minions: "
+    if (len(instance.friendlyMinions) == 0):
+        speechString += "None "
     for i in range(len(instance.friendlyMinions)):
-        speakBoardMinion(instance, True, i)
+        speechString += speakBoardMinion(instance, True, i, False)
         
-    speakString(instance, "Enemy minions: ")
+    speechString += "Enemy minions: "
+    if (len(instance.enemyMinions) == 0):
+        speechString += "None "
     for i in range(len(instance.enemyMinions)):
-        speakBoardMinion(instance, False, i)
+        speechString += speakBoardMinion(instance, False, i, False)
+
+    speakString(instance, speechString)
 
 def speakFriendlyWeapon(instance):
     if len(instance.friendlyWeapons) == 0:
@@ -1094,3 +1113,5 @@ def speakEnemyWeapon(instance):
         speechString += (", durability: " + str(weapon.durability))
         speakString(instance, speechString)
 
+def speakHandOptions(instance):
+    print(instance.handCards)

@@ -1,7 +1,0 @@
-keyboard
-pyautogui
-win32gui
-SpeechRecognition        
-requests
-pywin32
-PyAudio

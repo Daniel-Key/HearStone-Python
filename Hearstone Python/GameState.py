@@ -13,13 +13,13 @@ def calculateHandCards(instance):
         if ((("zone=HAND" in line) or ("zone=DECK" in line)) and not (("error=REQ_NOT_MINION_JUST_PLAYED" in line) or ("error=REQ_YOUR_TURN" in line))):
             zonePos = int(line[line.index("zonePos=") + 8 : line.index("cardId=") - 1])
             cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
-            logID = line[line.index("id=") + 3 : line.index("zone=") - 1]
+            logID = line[line.index("id=") + 3 : line.index("zone=")]
 
             #If the line doesn't contain the card ID, search the log for it
             if (cardID == ""):
-                cardID = MyLogParser.lookupCardID(logID)
+                cardID = MyLogParser.lookupCardID(instance, logID)
                 #The zonePos number will also be incorrect so search the log for this too
-                zonePos = int(MyLogParser.lookupZonePos(logID))
+                zonePos = int(MyLogParser.lookupZonePos(instance, logID))
 
             if cardID in instance.cardApiInfo:
                 cardInfo = instance.cardApiInfo[cardID]
@@ -58,9 +58,10 @@ def calculateHandCards(instance):
 def addToMinionsOrWeapons(instance, line, isFriendly):
     cardID = line[line.index("cardId=") + 7 : line.index("player=") - 1]
     logID = line[line.index("id=") + 3 : line.index("zone=")] 
+    zonePos = line[line.index("zonePos=") + 8 : line.index("cardId=")]
 
     if (cardID == ""):
-        cardID = MyLogParser.lookupCardID(logID)
+        cardID = MyLogParser.lookupCardID(instance, logID)
 
     cardInfo = ""
     if cardID in instance.cardApiInfo:
@@ -70,7 +71,7 @@ def addToMinionsOrWeapons(instance, line, isFriendly):
         instance.cardApiInfo[cardID] = cardInfo
 
     if("\"type\":\"Minion\"" in cardInfo):
-        minion = Minion.Minion(instance, cardID, logID)
+        minion = Minion.Minion(instance, cardID, logID, zonePos)
         if (isFriendly):
             newMinion = True
             for currentMinion in instance.friendlyMinions:
@@ -182,15 +183,23 @@ def calculateBoardMinions(instance):
         elif ("player=2" in line):
             addToMinionsOrWeapons(instance, line, False)
         elif ("type=END_TURN" not in line):
-            logID = int(line[line.index("id=") + 3 : line.index("zone=") - 1])
+            logID = str(int(line[line.index("id=") + 3 : line.index("zone=")])) + " "
             if (logID == instance.lastCardPlayedID):
                 addToMinionsOrWeapons(instance, line, True)
         
         if ("cardId=HERO" in line and "player=1" in line and not "REQ_ATTACK_GREATER_THAN_0" in line):
-            if len(instance.friendlyWeaponsInPlay) != 0:
+            if len(instance.friendlyWeaponsInPlay) != 0 and len(instance.friendlyWeapons) == 0:
                 instance.friendlyWeapons.append(instance.friendlyWeaponsInPlay[0])
 
     printBoardMinions(instance)
 
 def getHandSize(instance):
     return len(instance.handCards)
+
+
+def calculateOptions(instance):
+    # for line in instance.optionList:
+    #     if ("error=NONE"):
+    i=0
+            # logID = line[line.index("id=") + 3 : line.index("zone=")]
+            #lmao

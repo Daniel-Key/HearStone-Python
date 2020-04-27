@@ -15,6 +15,10 @@ pip install PyAudio-0.2.11-cp38-cp38-win32.whl
 Otherwise enter:
 pip install PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 
+The path at the top of MyLogParser.py is the default Windows 
+install directory for Hearthstone. If yours is different, 
+replace the path with the appropriate one. 
+
 
 To run the application, enter:
 python Main.py

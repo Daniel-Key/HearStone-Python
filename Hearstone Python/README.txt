@@ -19,6 +19,15 @@ The path at the top of MyLogParser.py is the default Windows
 install directory for Hearthstone. If yours is different, 
 replace the path with the appropriate one. 
 
+To enable Hearthstone logging, create a log.config file in the 
+folder at this location: %LOCALAPPDATA%/Blizzard/Hearthstone
+Put the following text in the file
+[Power]
+LogLevel=1
+FilePrinting=true
+ConsolePrinting=true
+ScreenPrinting=false
+
 
 To run the application, enter:
 python Main.py

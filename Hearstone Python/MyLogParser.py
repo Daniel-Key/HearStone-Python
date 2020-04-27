@@ -3,8 +3,8 @@ import API
 import Weapon
 import Minion
 
-# path = "D:/Hearthstone/Logs/Power.log"
-path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
+path = "D:/Hearthstone/Logs/Power.log"
+# path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
 
 # Process log file line
 def processLogFileLine(instance, line, lineNo) :
@@ -212,6 +212,10 @@ def checkForLogFileUpdates(instance):
     # E.g. if app opened before new game started, so log cleared mid-run
     if instance.logLength < instance.logFileGameStart:
         instance.logFileGameStart = 0
+    # Resetting logLength if log is cleared by game
+    # E.g. if app opened before new game started, so log cleared mid-run
+    if (thisLength < instance.logLength):
+        instance.logLength = thisLength
 
 
 def checkForGameStart(instance):

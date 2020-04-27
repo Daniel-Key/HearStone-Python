@@ -8,31 +8,13 @@ import Instance
 import AudioOut
 import keyboard
 
-# hslog stuff
-# from datetime import datetime, time, timedelta
-# from io import StringIO
-# from aniso8601 import parse_datetime
-# from hearthstone.enums import (
-# 	CardType, ChoiceType, GameTag, OptionType,
-# 	PlayReq, PlayState, PowerType, State, Step, Zone
-# )
-# from hslog import LogParser, packets
-# from hslog.exceptions import ParsingError
-# from hslog.parser import parse_initial_tag
-
-# logParser.checkForLogFileUpdates()
-# print(voiceRecognition.recognise())
-# mouseControl.click(100, 100)
-# mouseControl.clickFraction(0.1, 0.1)
-# voiceCommands.endTurn()
-
-# Enter virtual environment: .\env\Scripts\activate
-
 instance = Instance.Instance()
 try:
     open(MyLogParser.path)
 except:
-    open(MyLogParser.path, "x")
+    x = open(MyLogParser.path, "x")
+    x.close()
+    open(MyLogParser.path)
 inputReady = False
 
 def loop(): 

@@ -3,8 +3,8 @@ import API
 import Weapon
 import Minion
 
-path = "D:/Hearthstone/Logs/Power.log"
-# path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
+# path = "D:/Hearthstone/Logs/Power.log"
+path = "C:/Program Files (x86)/Hearthstone/Logs/Power.log"
 
 # Process log file line
 def processLogFileLine(instance, line, lineNo) :

@@ -1,6 +1,6 @@
 playsound==1.2.2
 SpeechRecognition==3.8.1
-requests==2.22.0
+requests==2.31.0
 gTTS==2.1.0
 aniso8601==8.0.0
 hearthstone==5.13.0
